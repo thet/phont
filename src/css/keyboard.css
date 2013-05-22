@@ -69,7 +69,8 @@ list-style: none;
 		.on {
 		display: none;
 		}
-		#keyboard li:hover {
+        #keyboard li.over,
+        #keyboard li:hover {
 		position: relative;
 		top: 1px;
 		left: 1px;
