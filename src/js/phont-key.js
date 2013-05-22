@@ -1,15 +1,15 @@
 $(window).keydown(function(event) {
-  event.preventDefault();
   var button = $("ul").find("li[data-keycode='" + event.which + "']");
   if (button.length>0) {
+    event.preventDefault();
     button.addClass('over');
     button.click();
   }
 });
 $(window).keyup(function(event) {
-  event.preventDefault();
   var button = $("ul").find("li[data-keycode='" + event.which + "']");
   if (button.length>0) {
+    event.preventDefault();
     button.removeClass('over');
   }
 });
