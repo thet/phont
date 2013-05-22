@@ -8,15 +8,36 @@
 <script src="js/jquery-1.8.2.min.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
  -->
- 
+ <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script src="js/phont.js"></script>
 <script type="text/javascript">
   
   
-    // $(document).ready(function() { });
     
+    /** "soundbank" - id to audio */
+  var sounds = Array(
+    undefined,
+    new Audio("data/testsound1.wav"),
+    new Audio("data/testsound2.wav"),
+    new Audio("data/testsound3.wav"),
+    new Audio("data/testsound4.wav"),
+    new Audio("data/testsound5.wav"),
+    new Audio("data/testsound6.wav"),
+    new Audio("data/testsound7.wav")
+    
+    );
 
-    
+  var mySequence = Array(1,2,3,4,5,6,7);
+
+  $(document).ready(function() { 
+	 
+  
+  });
+  
+  // to play sound : 
+  // playSequence(sounds, mySequence);
+  
+  
   </script>
 </head>
 <body>
