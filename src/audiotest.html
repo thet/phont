@@ -9,54 +9,13 @@
 <script src="bootstrap/js/bootstrap.js"></script>
  -->
  
+<script src="js/phont.js"></script>
 <script type="text/javascript">
   
   
     // $(document).ready(function() { });
     
-    var sounds = Array(
-    		undefined,
-    		new Audio("data/testsound1.wav"),
-    		new Audio("data/testsound2.wav"),
-    		new Audio("data/testsound3.wav"),
-    		new Audio("data/testsound4.wav"),
-    		new Audio("data/testsound5.wav"),
-    		new Audio("data/testsound6.wav"),
-    		new Audio("data/testsound7.wav")
-    		
-    );
-    
-    var mySequence = Array(1,0,2,0,3,0,4,0,5,0,6,0,7);
-    
-    
-    // test if ogg can be player
-    // (new Audio()).canPlayType("audio/ogg; codecs=vorbis")
 
-    // from : http://stackoverflow.com/questions/1933969/sound-effects-in-javascript-html5
-    
-    var phont_tick = 100;
-    var sequence_index;
-    
-    function playSample(soundbank, index) {
-    	soundbank[index].play();
-    }
-    
-    function beginSequence(sounds, sequence) {
-    	sequence_index = 0;
-    	continueSequence(sounds, sequence);    	
-    }
-    
-    function continueSequence(sounds, mySequence) {
-    	console.log("playing " + mySequence[sequence_index] + " at " + sequence_index);
-    	
-    	if (sequence_index < 0) return;   // signal to stop 
-    	if (sequence_index > mySequence.length-1) return;  // sequence finished
-    	if ( mySequence[sequence_index] > 0) {
-    	 playSample(sounds, mySequence[sequence_index]);
-    	}
-    	sequence_index++;
-    	setTimeout(function() {continueSequence(sounds, mySequence)}, phont_tick);
-    }
     
   </script>
 </head>
