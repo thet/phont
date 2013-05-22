@@ -4,6 +4,9 @@ $(window).keydown(function(event) {
     button.click();
   }
 });
+$('ul li').click(function(event) {
+  playSample(sounds, getSequenceFromString($(this).text(), characters)[0]);
+});
 
 
 
