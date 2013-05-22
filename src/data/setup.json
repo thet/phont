@@ -1,0 +1,11 @@
+{
+  phonemes_list:[
+    {id:1, char:'ʌ',  sound:'data/testsound1.wav'} ,
+    {id:2, char:'ɑ', sound:'data/testsound2.wav'} ,
+    {id:3, char:'æ',  sound:'data/testsound3.wav'} ,
+    {id:4, char:'e',  sound:'data/testsound4.wav'} ,
+    {id:4, char:'ə',  sound:'data/testsound5.wav'} ,
+    {id:5, char:'ɜ', sound:'data/testsound6.wav'} ,
+    {id:6, char:'ɪ',  sound:'data/testsound7.wav'} ,
+]}
+

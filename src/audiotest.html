@@ -12,30 +12,35 @@
 <script src="js/phont.js"></script>
 <script type="text/javascript">
   
-  
-    
-    /** "soundbank" - id to audio */
-  var sounds = Array(
-    undefined,
-    new Audio("data/testsound1.wav"),
-    new Audio("data/testsound2.wav"),
-    new Audio("data/testsound3.wav"),
-    new Audio("data/testsound4.wav"),
-    new Audio("data/testsound5.wav"),
-    new Audio("data/testsound6.wav"),
-    new Audio("data/testsound7.wav")
-    
-    );
+  // setup phonemes setting id, character/string and path to soundfile 
+  // ( or load from external file @see data/setup.json ) 
+  var testsetup = {
+		  phonemes_list:[
+		                 {id:1, char:'ʌ',  sound:'data/testsound1.wav'} ,
+		                 {id:2, char:'ɑ', sound:'data/testsound2.wav'} ,
+		                 {id:3, char:'æ',  sound:'data/testsound3.wav'} ,
+		                 {id:4, char:'e',  sound:'data/testsound4.wav'} ,
+		                 {id:4, char:'ə',  sound:'data/testsound5.wav'} ,
+		                 {id:5, char:'ɜ', sound:'data/testsound6.wav'} ,
+		                 {id:6, char:'ɪ',  sound:'data/testsound7.wav'} ,
+		             ]};
 
+  // get two mappings 
+  var playerdat   = initPlayer(testsetup);
+  var sounds      = playerdat[0];
+  var characters  = playerdat[1];
+  
+  // demo sequence as int 
   var mySequence = Array(1,2,3,4,5,6,7);
+  
+  // convert a string sequence (pass in the character mapping)
+	var convertedSequence = getSequenceFromString("ʌ ɑ:æ", characters)
 
-  $(document).ready(function() { 
-	 
+  // $(document).ready(function() {});
   
-  });
-  
-  // to play sound : 
+  // to play sound pass soundbankd (int->sound mapping) and sequence of ints:
   // playSequence(sounds, mySequence);
+  // playSequence(sounds, convertedSequence);
   
   
   </script>

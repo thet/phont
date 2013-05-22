@@ -48,3 +48,36 @@ function _continueSequence(sounds, mySequence) {
 	_sequence_index++;
 	setTimeout(function() { _continueSequence(sounds, mySequence)}, phont_tick);
 }
+
+/**
+ * generate mappings for id-to-sound and id-to-unicodeString
+ * @param initObject
+ */
+function initPlayer(initObject) {
+	var sound_map = [];
+	var repr_map = [];
+	for (i in initObject.phonemes_list) {
+		sound_map[initObject.phonemes_list[i].id] = new Audio(initObject.phonemes_list[i].sound);
+		repr_map[initObject.phonemes_list[i].id] = initObject.phonemes_list[i].char;
+	}
+	return [sound_map, repr_map];
+}
+
+/**
+ * transform phonetical string into sequence of ids
+ * @param strsequ
+ * @returns Array[int]
+ */
+function getSequenceFromString(strsequ, mapping) {
+	var intsequ = [];
+	var mapped_id;
+	for ( var i=0; i<strsequ.length; i++) {
+		if (strsequ[i] == ':') continue;	// ignore ':'
+		if (strsequ[i] == ' ') intsequ.push(0); // space -> 0
+		
+		if ((mapped_id = mapping.indexOf(strsequ[i])) > 0) {
+			intsequ.push(mapped_id);
+		}
+	}
+	return intsequ;
+}
