@@ -15,6 +15,41 @@ audio/mpeg                            mp3;
 audio/ogg                             ogg;
 audio/wave                            wav;
 
+TODO
+----
+choose license:
+http://www.gnu.org/licenses/license-list
+http://en.wikipedia.org/wiki/Free_Art_License
+http://directory.fsf.org/wiki/License:ArtisticLicense2.0
+
+
+infos
+=====
+
+nochmal unsere schreibmaschine: http://adm.at/phont/src/index.html
+
+zu den sounds:
+die scheinen sehr gut zu sein:
+http://app.lexercise.com/static/audio/phonemes/
+
+allerdings bräuchten wir hier eine zuordnung von sounds zu den einzelnen phonemen. geht nicht aus dem filenamen hervor... in ein paar files sollen aber id3 metadaten mit diesen infos zu finden sein, allerdings nicht in allen.
+orhan, hast du wen, der uns das aufbereiten kann? das könnte nämlich im schlimmsten fall einiges an zeit beanspruchen (bsp, wenn alles durchgehört und manuell zugeordnet werden muss).
+
+hier eine andere bibliothek: http://www.uiowa.edu/~acadtech/phonetics/english/frameset.html
+
+noch eine: http://web.uvic.ca/ling/resources/ipa/charts/IPAlab/
+http://web.uvic.ca/ling/resources/ipa/handbook_downloads.htm
+
+und noch eine: http://ipa.group.shef.ac.uk/symbols.php
+
+das englische phonetische alphabet, allerdings mit unbrauchbaren sounds: http://www.antimoon.com/how/pronunc-soundsipa.htm
+
+bei allen sounds stellt sich aber die frage des copyrights, die noch geklärt werden muss... ausser wir nehmens doch selbst auf.
+
+die javascript bibliothek, mit der man notenblätter generieren kann:
+http://0xfe.blogspot.co.at/2010/05/music-notation-with-html5-canvas.html
+
+
 
 Based on
 ========
