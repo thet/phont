@@ -6,7 +6,7 @@
 {id:1, char:'ʌ', sound:'data/phonemes/phoneme_15_2009-10-09_05-33-54.wav'}, 
 {id:2, char:'ɑ:', sound:'data/phonemes/phoneme_17_2009-10-14_03-08-05.wav'}, 
 {id:3, char:'æ', sound:'data/phonemes/phoneme_19_2009-10-21_10-31-10.wav'}, 
-{id:4, char:'e', sound:'data/phonemes/phoneme_20_2009-10-26_19-19-40.wav'}, 
+//{id:4, char:'e', sound:'data/phonemes/phoneme_20_2009-10-26_19-19-40.wav'}, 
 {id:5, char:'ə', sound:'data/phonemes/phoneme_2_2009-10-08_08-37-54.wav'},
 {id:6, char:'ɜ:', sound:'data/phonemes/phoneme_22_2009-10-22_16-21-49.wav'}, 
 {id:7, char:'ɪ', sound:'data/phonemes/phoneme_23_2009-10-23_11-02-48.wav'}, 
@@ -87,7 +87,8 @@
   var playerdat   = initPlayer(testsetup);
   var sounds      = playerdat[0];
   var characters  = playerdat[1];
-  var player      = playerdat[2]
+  var player      = playerdat[2];
+  var alet 		  = playerdat[3];
 
   // demo sequence as int
   var mySequence = Array(1,2,3,4,5,6,7);

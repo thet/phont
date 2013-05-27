@@ -15,6 +15,12 @@ function playSample(soundbank, index, player) {
 	//soundbank[index].currentTime = 0;
 	//soundbank[index].play();
 	player.buffer = soundbank[index];
+	
+	rt = new TriggerControl(alet);
+	rt.connect(player, 0, 1);
+	
+	// player.connect(alet.output);
+	
 }
 
 function stopPlayer() {
@@ -63,19 +69,24 @@ function initPlayer(initObject) {
         var buf = new AudioletBuffer(1,0);
         buf.load(initObject.phonemes_list[i].sound);
         sound_map[initObject.phonemes_list[i].id] = buf;
+        
 		//sound_map[initObject.phonemes_list[i].id] = new Audio(initObject.phonemes_list[i].sound);
-		repr_map[initObject.phonemes_list[i].id] = initObject.phonemes_list[i].char;
+		
+        repr_map[initObject.phonemes_list[i].id] = initObject.phonemes_list[i].char;
 	}
+	
     player = new BufferPlayer(alet, 
-			sound_map[0],
-			0.3,  // sample rate 
+			sound_map[1],
+			0.8,  // sample rate 
 			0,  // start pos
 			0   // loop ? 
     );
-	rt = new TriggerControl(alet);
-	rt.connect(player, 0, 1);
+	
+//    rt = new TriggerControl(alet);
+//	rt.connect(player, 0, 1);
+	
 	player.connect(alet.output);
-	return [sound_map, repr_map, player];
+	return [sound_map, repr_map, player, alet];
 }
 
 /**
