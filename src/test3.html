@@ -1,0 +1,88 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  
+<!-- 
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="css/site.css" type="text/css">
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+ -->
+ 
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script src="js/Audiolet.js"></script>
+<script src="js/phont.js"></script>
+<script type="text/javascript">
+//Example needs to be run from a server for XHR file loading to work
+
+var alet, buf, player, rt;
+
+function setUp() {
+	alet = new Audiolet();
+	buf = new AudioletBuffer(1,0);
+	buf.load('data/testsound1.wav');
+	player = new BufferPlayer(alet, 
+			buf, 
+			0.2,  // sample rate 
+			0,  // start pos
+			0   // loop ? 
+		);
+	rt = new TriggerControl(alet);
+	rt.connect(player, 0, 1);
+	player.connect(alet.output);
+}
+
+
+/* window.onload = playExample;
+function playExample() {
+    var AudioletApp = function() {
+        this.audiolet = new Audiolet();
+        // Amen break is 138 BPM
+        this.audiolet.scheduler.setTempo(138);
+
+        // Create an empty buffer
+        this.amen = new AudioletBuffer(1, 0);
+        // Load wav using synchronous XHR
+        this.amen.load('data/testsound1.wav', false);
+
+        // Create buffer player
+        this.player = new BufferPlayer(this.audiolet, this.amen, 1, 0, 0);
+        // Create trigger to force breakbeat cuts
+        this.restartTrigger = new TriggerControl(this.audiolet);
+
+        // Connect it all up
+        this.restartTrigger.connect(this.player, 0, 1);
+        this.player.connect(this.audiolet.output);
+
+        // Work through the four bars in order
+        var barStartPosition = new PSequence([0, 0, 0, 0,
+                                              1, 1, 1, 1,
+                                              2, 2, 2, 2,
+                                              3, 3, 3, 3],
+                                             Infinity);
+        // Rearrange the individual beats within a bar
+        var positionInBar = new PChoose([new PSequence([0, 1, 2, 3]),
+                                         new PSequence([0, 0, 0, 0]),
+                                         new PSequence([0, 0, 2, 2]),
+                                         new PSequence([0, 3, 2, 1])],
+                                         Infinity);
+
+        this.audiolet.scheduler.play([barStartPosition, positionInBar], 1,
+            function(barStartPosition, positionInBar) {
+                // Scale position 0->1
+                var position = barStartPosition / 4 + positionInBar / 16;
+                // Scale position 0->length
+                position *= this.amen.length;
+                this.player.startPosition.setValue(position);
+                this.restartTrigger.trigger.setValue(1);
+            }.bind(this)
+        );
+    }
+
+    this.audioletApp = new AudioletApp();
+}; */
+</script>
+</head>
+<body>
+</body>
+</html>
