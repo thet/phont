@@ -1,1 +1,3 @@
+textarea { width: 671px; height: 5em; }
 textarea:disabled { color: black; }
+textarea#write { font: 4em monospace; }
