@@ -14,12 +14,29 @@ var _sequence_index;
 function playSample(soundbank, index, player) {
 	//soundbank[index].currentTime = 0;
 	//soundbank[index].play();
-	player.buffer = soundbank[index];
 	
-	rt = new TriggerControl(alet);
-	rt.connect(player, 0, 1);
+	// create a new player (?)
+	player = new BufferPlayer(alet, 
+			soundbank[index],
+			0.8,  // sample rate 
+			0,  // start pos
+			0   // loop ? 
+    );
+
+	// connect plays the sound 
+	player.connect(alet.output);
+
 	
+	// .. means we dont even need the faulty TriggerControler
+//  rt = new TriggerControl(alet);
+//	rt.connect(player, 0, 1);
+	
+	
+	
+	// .. neither to set buffer on the player
+	//	player.buffer = soundbank[index];
 	// player.connect(alet.output);
+
 	
 }
 
