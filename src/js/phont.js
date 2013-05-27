@@ -26,12 +26,9 @@ function playSample(soundbank, index, player) {
 	// connect plays the sound 
 	player.connect(alet.output);
 
-	
 	// .. means we dont even need the faulty TriggerControler
 //  rt = new TriggerControl(alet);
 //	rt.connect(player, 0, 1);
-	
-	
 	
 	// .. neither to set buffer on the player
 	//	player.buffer = soundbank[index];
