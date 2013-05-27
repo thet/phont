@@ -87,6 +87,7 @@
   var playerdat   = initPlayer(testsetup);
   var sounds      = playerdat[0];
   var characters  = playerdat[1];
+  var player      = playerdat[2]
 
   // demo sequence as int
   var mySequence = Array(1,2,3,4,5,6,7);

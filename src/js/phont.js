@@ -11,9 +11,10 @@ var _sequence_index;
 /** 
  * plays sample "index" of soundbank "soundbank"
  */
-function playSample(soundbank, index) {
-	soundbank[index].currentTime = 0;
-	soundbank[index].play();
+function playSample(soundbank, index, player) {
+	//soundbank[index].currentTime = 0;
+	//soundbank[index].play();
+	player.buffer = soundbank[index];
 }
 
 function stopPlayer() {
@@ -52,13 +53,29 @@ function _continueSequence(sounds, mySequence) {
  * @param initObject
  */
 function initPlayer(initObject) {
+
+    var alet, player, rt;
+	alet = new Audiolet();
+
 	var sound_map = [];
 	var repr_map = [];
 	for (i in initObject.phonemes_list) {
-		sound_map[initObject.phonemes_list[i].id] = new Audio(initObject.phonemes_list[i].sound);
+        var buf = new AudioletBuffer(1,0);
+        buf.load(initObject.phonemes_list[i].sound);
+        sound_map[initObject.phonemes_list[i].id] = buf;
+		//sound_map[initObject.phonemes_list[i].id] = new Audio(initObject.phonemes_list[i].sound);
 		repr_map[initObject.phonemes_list[i].id] = initObject.phonemes_list[i].char;
 	}
-	return [sound_map, repr_map];
+    player = new BufferPlayer(alet, 
+			sound_map[0],
+			0.3,  // sample rate 
+			0,  // start pos
+			0   // loop ? 
+    );
+	rt = new TriggerControl(alet);
+	rt.connect(player, 0, 1);
+	player.connect(alet.output);
+	return [sound_map, repr_map, player];
 }
 
 /**
