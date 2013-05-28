@@ -12,30 +12,55 @@ var _sequence_index;
  * plays sample "index" of soundbank "soundbank"
  */
 function playSample(soundbank, index, player) {
-	//soundbank[index].currentTime = 0;
-	//soundbank[index].play();
+
+	// stop player
+	player.playing	= false;
 	
-	// create a new player (?)
-	player = new BufferPlayer(alet, 
-			soundbank[index],
-			0.8,  // sample rate 
-			0,  // start pos
-			0   // loop ? 
-    );
-
-	// connect plays the sound 
-	player.connect(alet.output);
-
-	// .. means we dont even need the faulty TriggerControler
-//  rt = new TriggerControl(alet);
-//	rt.connect(player, 0, 1);
+	// check if soundbuffer ok
+	if (soundbank[index] == undefined) {
+		console.log("no sample/buffer set");
+		return;
+	}
 	
-	// .. neither to set buffer on the player
-	//	player.buffer = soundbank[index];
-	// player.connect(alet.output);
-
+	// set buffer + rewind
+	player.buffer 	= soundbank[index];
+	player.position = 0;
+	
+	//
+	// possible additional params :
+	//
+	//		player.position = some_offset;	// absolute offset
+	//		player.position = player.buffer.length * 0.5;	// offset relative to sample length
+	//		player.playbackRate.setValue(0.8);	// playback rate (~ pitch)
+	//
+	
+	// retrigger play !
+	player.playing 	= true;
+	
+//	//soundbank[index].currentTime = 0;
+//	//soundbank[index].play();
+//	
+//	// create a new player (?)
+//	player = new BufferPlayer(alet, 
+//			soundbank[index],
+//			0.8,  // sample rate 
+//			0,  // start pos
+//			0   // loop ? 
+//    );
+//
+//	// connect plays the sound 
+//	player.connect(alet.output);
+//
+//	// .. means we dont even need the faulty TriggerControler
+////  rt = new TriggerControl(alet);
+////	rt.connect(player, 0, 1);
+//	
+//	// .. neither to set buffer on the player
+//	//	player.buffer = soundbank[index];
+//	// player.connect(alet.output);
 	
 }
+
 
 function stopPlayer() {
 	_sequence_index = -1;
@@ -62,7 +87,7 @@ function _continueSequence(sounds, mySequence) {
 	if (_sequence_index < 0) return;   // signal to stop 
 	if (_sequence_index > mySequence.length-1) return;  // sequence finished
 	if ( mySequence[_sequence_index] > 0) {
-	 playSample(sounds, mySequence[_sequence_index]);
+	 playSample(sounds, mySequence[_sequence_index], player);
 	}
 	_sequence_index++;
 	setTimeout(function() { _continueSequence(sounds, mySequence)}, phont_tick);
@@ -99,7 +124,8 @@ function initPlayer(initObject) {
 //    rt = new TriggerControl(alet);
 //	rt.connect(player, 0, 1);
 	
-	// player.connect(alet.output);
+    player.playing = false;
+	player.connect(alet.output);
 	return [sound_map, repr_map, player, alet];
 }
 
