@@ -23,6 +23,24 @@ http://en.wikipedia.org/wiki/Free_Art_License
 http://directory.fsf.org/wiki/License:ArtisticLicense2.0
 
 
+libs
+====
+
+musical score lib
+http://0xfe.blogspot.co.at/2010/05/music-notation-with-html5-canvas.html
+
+synth lib
+https://github.com/oampo/Audiolet
+http://oampo.github.io/Audiolet/api.html
+
+http://audiolibjs.org/
+
+https://github.com/mattdiamond/Recorderjs
+
+ui
+http://kievii.net/examples.html
+http://raphaeljs.com/
+
 infos
 =====
 
@@ -45,9 +63,6 @@ und noch eine: http://ipa.group.shef.ac.uk/symbols.php
 das englische phonetische alphabet, allerdings mit unbrauchbaren sounds: http://www.antimoon.com/how/pronunc-soundsipa.htm
 
 bei allen sounds stellt sich aber die frage des copyrights, die noch geklärt werden muss... ausser wir nehmens doch selbst auf.
-
-die javascript bibliothek, mit der man notenblätter generieren kann:
-http://0xfe.blogspot.co.at/2010/05/music-notation-with-html5-canvas.html
 
 
 
