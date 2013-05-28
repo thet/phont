@@ -19,6 +19,8 @@ $('ul li').click(function(event) {
     playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
   } else if (keycode===225 || keycode===27) {
       stopPlayer();
+  } else if (keycode===8) {
+	  // DELETE - handled elsewhere, but dont play sample
   } else {
       playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
   }
