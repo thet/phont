@@ -1,3 +1,20 @@
 textarea { width: 671px; height: 5em; }
 textarea:disabled { color: black; }
 textarea#write { font: 4em monospace; }
+
+
+/*
+ make text unselectable
+ */
+*.unselectable,
+#keyboard li  {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   -ms-user-select: none;
+   user-select: none;
+}
+
+
+
