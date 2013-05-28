@@ -99,7 +99,7 @@ function initPlayer(initObject) {
 //    rt = new TriggerControl(alet);
 //	rt.connect(player, 0, 1);
 	
-	player.connect(alet.output);
+	// player.connect(alet.output);
 	return [sound_map, repr_map, player, alet];
 }
 
