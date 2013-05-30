@@ -51,6 +51,7 @@ body {
 #keyboard .capslock {
     width: 80px;
 }
+#keyboard .play.lastitem, 
 #keyboard .return {
     width: 77px;
 }

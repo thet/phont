@@ -25,17 +25,31 @@ body {
 #container {
     margin: 0px auto;
 }
+
+#keyboard li.red {
+    background-color:#d40a23;
+}
+#keyboard li.blue {
+    background-color:#4444FF;
+}
+#keyboard li.green {
+    background-color:#99ac19;
+}
+#keyboard li.grey {
+    background-color:#abbcb4;
+}
+#keyboard li.yellow {
+    background-color: #ffff66;
+}
+
 #keyboard .save,
 #keyboard .delete {
-    background-color:#d40a23;
     font-family: 'Merriweather Sans', sans-serif;
 }
 #keyboard .play {
-    background-color:#99ac19;
     font-family: 'Merriweather Sans', sans-serif;
 }
 #keyboard .return {
-    background-color:#abbcb4;
     font-family: 'Merriweather Sans', sans-serif;
 }
 #keyboard .left-shift {
@@ -52,6 +66,5 @@ body {
     sans-serif;
 }
 #keyboard .space {
-    background-color: #ffff66;
     font-family: 'Merriweather Sans', sans-serif;
 }
