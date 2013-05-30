@@ -16,9 +16,10 @@ function playSample(soundbank, index, player) {
 	// stop player
 	player.playing	= false;
 	
+	console.log("play " + index);
 	// check if soundbuffer ok
 	if (soundbank[index] == undefined) {
-		console.log("no sample/buffer set");
+		console.log("no sample/buffer set for index " + index);
 		return;
 	}
 	
@@ -36,31 +37,7 @@ function playSample(soundbank, index, player) {
 	
 	// retrigger play !
 	player.playing 	= true;
-	
-//	//soundbank[index].currentTime = 0;
-//	//soundbank[index].play();
-//	
-//	// create a new player (?)
-//	player = new BufferPlayer(alet, 
-//			soundbank[index],
-//			0.8,  // sample rate 
-//			0,  // start pos
-//			0   // loop ? 
-//    );
-//
-//	// connect plays the sound 
-//	player.connect(alet.output);
-//
-//	// .. means we dont even need the faulty TriggerControler
-////  rt = new TriggerControl(alet);
-////	rt.connect(player, 0, 1);
-//	
-//	// .. neither to set buffer on the player
-//	//	player.buffer = soundbank[index];
-//	// player.connect(alet.output);
-	
-}
-
+}	
 
 function stopPlayer() {
 	_sequence_index = -1;
