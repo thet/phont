@@ -17,4 +17,41 @@ textarea#write { font: 4em monospace; }
 }
 
 
-
+/* keyboard customizations */
+body {
+    background: #e0ddaa;
+    margin: 100px auto;
+}
+#container {
+    margin: 0px auto;
+}
+#keyboard .save,
+#keyboard .delete {
+    background-color:#d40a23;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+#keyboard .play {
+    background-color:#99ac19;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+#keyboard .return {
+    background-color:#abbcb4;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+#keyboard .left-shift {
+    background-color:#abbcb4;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+#keyboard .right-shift {
+    background-color:#abbcb4;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.uppercase {
+    background-color:#abbcb4;
+    font-family: 'Merriweather Sans',
+    sans-serif;
+}
+#keyboard .space {
+    background-color: #ffff66;
+    font-family: 'Merriweather Sans', sans-serif;
+}

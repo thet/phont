@@ -15,18 +15,20 @@ $(window).keyup(function(event) {
 });
 $('ul li').click(function(event) {
   var keycode = $(this).data('keycode');
-  if (keycode===16) {
-    playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
-  } else if (keycode===225 || keycode===27) {
-      stopPlayer();
-  } else if (keycode===8) {
-	  // DELETE - handled elsewhere, but dont play sample
+  if ($(this).hasClass('play')) {
+      if ($(this).text() === 'stop') {
+        stopPlayer();
+        $(this).text('play');
+      } else {
+        playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
+        $(this).text('stop');
+      }
+  } else if ($(this).hasClass('control') || $(this).hasClass('symbol') || $(this).hasClass('space')) {
+	  // handled elsewhere, but dont play sample
   } else {
       playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
   }
 });
-
-
 
 function play_audiolet_sample(soundpath) {
     var alet, buf, player, rt;
@@ -43,5 +45,3 @@ function play_audiolet_sample(soundpath) {
 	rt.connect(player, 0, 1);
 	player.connect(alet.output);
 }
-
-

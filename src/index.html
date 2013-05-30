@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <title>Online Keyboard</title>
+  <title>phont - phonetic typewriter</title>
+  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Merriweather+Sans'>
   <link rel="stylesheet" type="text/css" href="css/keyboard.css">
   <link rel="stylesheet" type="text/css" href="css/phont.css">
 </head>
@@ -24,8 +25,8 @@
     <li data-id="" data-keycode="48" class="letter">ʊ</li>
     <li data-id="" data-keycode="173" class="letter">u:</li>
     <li data-id="" data-keycode="61" class="letter">aɪ</li>
-    <li data-id="" data-keycode="8" class="delete lastitem">delete</li>
-    <li data-id="" data-keycode="9" class="tab">tab</li>
+    <li data-id="" data-keycode="8" class="control delete lastitem">delete</li>
+    <li data-id="" data-keycode="9" class="control save firstitem">save</li><!-- tab -->
     <li data-id="" data-keycode="81" class="letter">aʊ</li>
     <li data-id="" data-keycode="87" class="letter">eɪ</li>
     <li data-id="" data-keycode="69" class="letter">oʊ</li>
@@ -39,7 +40,7 @@
     <li data-id="" data-keycode="219" class="letter">g</li>
     <li data-id="" data-keycode="221" class="letter">h</li>
     <li data-id="" data-keycode="220" class="letter lastitem">j</li>
-    <li data-id="" data-keycode="225" class="capslock">stop</li>
+    <li data-id="" data-keycode="225" class="control play firstitem">play</li><!-- capslock -->
     <li data-id="" data-keycode="65" class="letter">k</li>
     <li data-id="" data-keycode="83" class="letter">l</li>
     <li data-id="" data-keycode="68" class="letter">m</li>
@@ -51,8 +52,8 @@
     <li data-id="" data-keycode="76" class="letter">t</li>
     <li data-id="" data-keycode="59" class="letter">tʃ</li>
     <li data-id="" data-keycode="222" class="letter">θ</li>
-    <li data-id="" data-keycode="13" class="return lastitem">return</li>
-    <li data-id="" data-keycode="16" class="left-shift">play</li>
+    <li data-id="" data-keycode="13" class="control return lastitem">return</li>
+    <li data-id="" data-keycode="16" class="control left-shift firstitem">shift</li>
     <li data-id="" data-keycode="90" class="letter">ð</li>
     <li data-id="" data-keycode="88" class="letter">v</li>
     <li data-id="" data-keycode="67" class="letter">w</li>
@@ -63,8 +64,8 @@
     <li data-id="" data-keycode="188" class="symbol"><span class="off">.</span><span class="on">.</span></li>
     <li data-id="" data-keycode="190" class="symbol"><span class="off">?</span><span class="on">?</span></li>
     <li data-id="" data-keycode="191" class="symbol"><span class="off">!</span><span class="on">!</span></li>
-    <li data-id="" data-keycode="16" class="right-shift lastitem">play</li>
-    <li data-id="" data-keycode="32" class="space lastitem">&nbsp;</li>
+    <li data-id="" data-keycode="16" class="control right-shift lastitem">shift</li>
+    <li data-id="" data-keycode="32" class="space firstitem lastitem">&nbsp;</li>
   </ul>
 </div>
 
@@ -95,5 +96,5 @@ function setUp() {
 	player.connect(alet.output);
 }
 
-
+</script>
 </body></html>
