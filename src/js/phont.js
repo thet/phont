@@ -11,7 +11,7 @@ var global_settings = new SoundSettings();
  * object that bundles sound settings
  */
 function SoundSettings(tick, rate, offset) {
-	this.tick 	= tick || 128;
+	this.tick 	= tick || 256;
 	this.rate 	= rate || 0.75;
 	this.offset = offset || 0;
 }
@@ -20,8 +20,8 @@ function SoundSettings(tick, rate, offset) {
 var control_funcs = {
 	PUP: function(settings) { settings.rate += settings.rate<0.9?0.1:0;},
 	PDN: function(settings) { settings.rate -= settings.rate>0.1?0.1:0;},
-	TUP: function(settings) { settings.tick *= settings.tick<2000?2:1;},
-	TDN: function(settings) { settings.tick /= settings.tick>16?2:1;},
+	TUP: function(settings) { settings.tick /= settings.tick>16?2:1;},
+	TDN: function(settings) { settings.tick *= settings.tick<2000?2:1;},
 }
 
 /** mapping from character to control code */
@@ -64,6 +64,10 @@ function playSample(soundbank, index, player, settings) {
 	//		player.playbackRate.setValue(0.8);	// playback rate (~ pitch)
 	//
 	
+	
+	// hack/fix to use default settings if no settings passed in 
+	if (settings == undefined) { settings = new SoundSettings();}
+	
 	// if settings are passed in, use these 
 	if ( settings ) {
 		player.playbackRate.setValue(settings.rate);
@@ -87,6 +91,7 @@ function stopPlayer() {
  * @param sequence
  */
 function playSequence(sounds, sequence) {
+	console.log("begin play sequence")
 	_sequence_index = 0;
 	global_settings = new SoundSettings();
 	_continueSequence(sounds, sequence);   	
@@ -99,25 +104,40 @@ function playSequence(sounds, sequence) {
  */
 function _continueSequence(sounds, mySequence) {
 	//console.log("playing " + mySequence[_sequence_index] + " at " + _sequence_index);
-	
+
+	// check for stop signal or finished sequence
 	if (	_sequence_index < 0   						// signaled to stop
 		|| 	_sequence_index > mySequence.length-1) {	// sequence finished
+		console.log("exit continue sequence");
 		resetSequenceState();
 		return;  
 	}
 	
-	if ( mySequence[_sequence_index] > 0) {
-	 playSample(sounds, mySequence[_sequence_index], player);
-	}
+	var noteCode;
+	noteCode = mySequence[_sequence_index];
 	
+	while (noteCode in control_funcs) {
+		// process control codes (if any) 
+		control_funcs[noteCode](global_settings);
+		_sequence_index++;
+		if (_sequence_index > mySequence.length-1) { resetSequenceState(); return;}
+		noteCode = mySequence[_sequence_index];
+	} 
+	
+	if ( noteCode > 0) {
+		// value greater 0 means play note with that index 
+		playSample(sounds, noteCode, player,global_settings);
+	}
+
 	_sequence_index++;
 	setTimeout(function() { _continueSequence(sounds, mySequence)}, global_settings.tick);
 	
-	//console.log('next tick in ' + global_settings.tick);
+	console.log('next tick in ' + global_settings.tick);
 }
 
 function resetSequenceState() {
 	global_settings = new SoundSettings();
+	console.log("end sequence");
 }
 
 /**
@@ -161,9 +181,17 @@ function getSequenceFromString(strsequ, mapping) {
 	var intsequ = [];
 	var mapped_id;
 	for ( var i=0; i<strsequ.length; i++) {
-		if (strsequ[i] == ':') continue;	// ignore ':'
+		
+		// ignore ':', add '0' for space(=pause)
+		if (strsequ[i] == ':') continue;		// ignore ':'
 		if (strsequ[i] == ' ') intsequ.push(0); // space -> 0
 		
+		// control sequence
+		if (strsequ[i] in control_mappings) {
+			intsequ.push(control_mappings[strsequ[i]]);
+		}
+		
+		// ordinary note : push int code of soundbank
 		if ((mapped_id = mapping.indexOf(strsequ[i])) > 0) {
 			intsequ.push(mapped_id);
 		}
