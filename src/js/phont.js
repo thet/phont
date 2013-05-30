@@ -1,7 +1,3 @@
-// test if ogg can be player
-// (new Audio()).canPlayType("audio/ogg; codecs=vorbis")
-// from : http://stackoverflow.com/questions/1933969/sound-effects-in-javascript-html5
-
 /** timeout ticker */
 var phont_tick = 100;
 
@@ -72,11 +68,12 @@ function _continueSequence(sounds, mySequence) {
 
 /**
  * generate mappings for id-to-sound and id-to-unicodeString
+ * initialise audiolet and player-node
  * @param initObject
  */
 function initPlayer(initObject) {
 
-    var alet, player, rt;
+    var alet, player;
 	alet = new Audiolet();
 
 	var sound_map = [];
@@ -85,9 +82,6 @@ function initPlayer(initObject) {
         var buf = new AudioletBuffer(1,0);
         buf.load(initObject.phonemes_list[i].sound);
         sound_map[initObject.phonemes_list[i].id] = buf;
-        
-		//sound_map[initObject.phonemes_list[i].id] = new Audio(initObject.phonemes_list[i].sound);
-		
         repr_map[initObject.phonemes_list[i].id] = initObject.phonemes_list[i].char;
 	}
 	
@@ -98,11 +92,9 @@ function initPlayer(initObject) {
 			0   // loop ? 
     );
 	
-//    rt = new TriggerControl(alet);
-//	rt.connect(player, 0, 1);
-	
     player.playing = false;
 	player.connect(alet.output);
+	
 	return [sound_map, repr_map, player, alet];
 }
 
