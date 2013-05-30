@@ -52,18 +52,3 @@ var sounds      = playerdat[0];
 var characters  = playerdat[1];
 var player      = playerdat[2];
 var alet        = playerdat[3];
-
-// demo sequence as int
-//var mySequence = Array(1,2,3,4,5,6,7);
-
-// convert a string sequence (pass in the character mapping)
-//var convertedSequence = getSequenceFromString("ʌ ɑ:æ", characters)
-
-// $(document).ready(function() {});
-
-// to play sound pass soundbankd (int->sound mapping) and sequence of ints:
-// playSequence(sounds, mySequence);
-// playSequence(sounds, convertedSequence);
-
-// play just one character :
-// playSample(sounds, getSequenceFromString( "ʌ" , characters)[0])

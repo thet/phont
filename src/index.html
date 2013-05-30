@@ -76,25 +76,4 @@
 <script type="text/javascript" src="js/phont-key.js"></script>
 <script type="text/javascript" src="js/phont-init.js"></script>
 
-<script type="text/javascript">
-//Example needs to be run from a server for XHR file loading to work
-
-var alet, buf, player, rt;
-
-function setUp() {
-	alet = new Audiolet();
-	buf = new AudioletBuffer(1,0);
-	buf.load('data/testsound1.wav');
-	player = new BufferPlayer(alet, 
-			buf, 
-			0.2,  // sample rate 
-			0,  // start pos
-			0   // loop ? 
-		);
-	rt = new TriggerControl(alet);
-	rt.connect(player, 0, 1);
-	player.connect(alet.output);
-}
-
-</script>
 </body></html>
