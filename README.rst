@@ -10,13 +10,13 @@ http://adm.at/phont/src/index.html
 
 Beschreibungen: 
 Save:
-sichert das ergebnis unter ihrem namen / saves the results as your contribution
+
 Silence: 
-sets a pause - to extend the pause type many times / setzt eine pause - um die pause zu verlängern, mehrmals tippen
+
 Shift: 
-gives access to another phone of the same category of phonems / wechselt zwischen alternativen Lauten der selben Famillie.
+
 Delete: 
-löscht das phone vor dem cusor / deletes the phone before the cursor
+
 Pfeil rechts
 bewegt den cursor vor das nächste phone / moves the cursor to the next phone
 Pfeil links
