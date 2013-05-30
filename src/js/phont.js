@@ -1,18 +1,51 @@
-/** timeout ticker */
-var phont_tick = 100;
+///** timeout ticker */
+//var phont_tick = 100;
 
 /** indicates play position */
 var _sequence_index;
 
+
+var global_settings = new SoundSettings();
+
+/**
+ * object that bundles sound settings
+ */
+function SoundSettings(tick, rate, offset) {
+	this.tick 	= tick || 128;
+	this.rate 	= rate || 0.75;
+	this.offset = offset || 0;
+}
+
+/** object that functions as a lookup for control-codes to methods */
+var control_funcs = {
+	PUP: function(settings) { settings.rate += settings.rate<0.9?0.1:0;},
+	PDN: function(settings) { settings.rate -= settings.rate>0.1?0.1:0;},
+	TUP: function(settings) { settings.tick *= settings.tick<2000?2:1;},
+	TDN: function(settings) { settings.tick /= settings.tick>16?2:1;},
+}
+
+/** mapping from character to control code */
+var control_mappings = {
+	'#':'PUP',
+	'.':'PDN',
+	'+':'TUP',
+	'-':'TDN',
+}
+
 /** 
  * plays sample "index" of soundbank "soundbank"
+ * @param soundbank an array of AudioletBuffer
+ * @param index which AudioletBuffer to play from the array 
+ * @param player BufferPlayer instance to play the buffer
+ * @param settings optional SoundSettings object
  */
-function playSample(soundbank, index, player) {
+function playSample(soundbank, index, player, settings) {
 
 	// stop player
 	player.playing	= false;
 	
 	console.log("play " + index);
+	
 	// check if soundbuffer ok
 	if (soundbank[index] == undefined) {
 		console.log("no sample/buffer set for index " + index);
@@ -31,10 +64,19 @@ function playSample(soundbank, index, player) {
 	//		player.playbackRate.setValue(0.8);	// playback rate (~ pitch)
 	//
 	
+	// if settings are passed in, use these 
+	if ( settings ) {
+		player.playbackRate.setValue(settings.rate);
+		player.position = player.buffer.length * settings.offset;
+	}
+	
 	// retrigger play !
 	player.playing 	= true;
 }	
 
+/**
+ * tells _continueSequence() to stop on next tick
+ */
 function stopPlayer() {
 	_sequence_index = -1;
 }
@@ -46,7 +88,8 @@ function stopPlayer() {
  */
 function playSequence(sounds, sequence) {
 	_sequence_index = 0;
-	_continueSequence(sounds, sequence);    	
+	global_settings = new SoundSettings();
+	_continueSequence(sounds, sequence);   	
 }
 
 /**
@@ -57,13 +100,24 @@ function playSequence(sounds, sequence) {
 function _continueSequence(sounds, mySequence) {
 	//console.log("playing " + mySequence[_sequence_index] + " at " + _sequence_index);
 	
-	if (_sequence_index < 0) return;   // signal to stop 
-	if (_sequence_index > mySequence.length-1) return;  // sequence finished
+	if (	_sequence_index < 0   						// signaled to stop
+		|| 	_sequence_index > mySequence.length-1) {	// sequence finished
+		resetSequenceState();
+		return;  
+	}
+	
 	if ( mySequence[_sequence_index] > 0) {
 	 playSample(sounds, mySequence[_sequence_index], player);
 	}
+	
 	_sequence_index++;
-	setTimeout(function() { _continueSequence(sounds, mySequence)}, phont_tick);
+	setTimeout(function() { _continueSequence(sounds, mySequence)}, global_settings.tick);
+	
+	//console.log('next tick in ' + global_settings.tick);
+}
+
+function resetSequenceState() {
+	global_settings = new SoundSettings();
 }
 
 /**
