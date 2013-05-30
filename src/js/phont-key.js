@@ -21,6 +21,8 @@ $('ul li').click(function(event) {
       stopPlayer();
   } else if (keycode===8) {
 	  // DELETE - handled elsewhere, but dont play sample
+  } else if (keycode===32) {
+	  // space
   } else {
       playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
   }
