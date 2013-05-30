@@ -16,5 +16,10 @@ textarea#write { font: 4em monospace; }
    user-select: none;
 }
 
-
-
+/**
+ buttons for control codes
+ */
+#keyboard li.ctrcode  {
+  width:90px;
+  background:#f5f5f5;
+}
