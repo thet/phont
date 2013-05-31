@@ -3,7 +3,7 @@
 // from : http://stackoverflow.com/questions/1933969/sound-effects-in-javascript-html5
 
 /** timeout ticker */
-var phont_tick = 100;
+var phont_tick = 500;
 
 /** indicates play position */
 var _sequence_index;
