@@ -1,7 +1,7 @@
 $(window).keydown(function(event) {
     var button = $("ul").find("li[data-keycode='" + event.which + "']");
     if (button.length>0) {
-        event.preventDefault();
+        //event.preventDefault();
         button.addClass('over');
         button.click();
     }
@@ -9,7 +9,7 @@ $(window).keydown(function(event) {
 $(window).keyup(function(event) {
     var button = $("ul").find("li[data-keycode='" + event.which + "']");
     if (button.length>0) {
-        event.preventDefault();
+        //event.preventDefault();
         button.removeClass('over');
     }
 });
