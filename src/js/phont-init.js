@@ -45,6 +45,7 @@ var testsetup = {
         {id:40, char:'z', sound:'data/phonemes/phoneme_54_2009-10-23_10-40-04.wav'},
         {id:41, char:'ʒ', sound:'data/phonemes/phoneme_55_2009-10-23_10-43-20.wav'},
         {id:42, char:'dʒ', sound:'data/phonemes/phoneme_56_2009-10-23_10-46-47.wav'},
+        {id:44, char:' ', sound:'data/silence.wav'},
     ]};
 
 // get two mappings
