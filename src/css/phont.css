@@ -2,11 +2,11 @@
 .phonem { position: relative;
           float: left;
           border: 1px solid black;
-          height: 8em; width: 3em;
+          height: 10em; width: 3em;
           margin-right: 0.5em; }
 
 .phonem .filter { position: absolute; bottom: 0; }
-.phonem .filter input { display: block; width: 2em; }
+.phonem .filter input { display: block; width: 2em; height: 1em; }
 
 .phonem .char { font: 4em monospace; }
 
@@ -33,6 +33,7 @@
 body {
     background: #e0ddaa;
     margin: 100px auto;
+    text-rendering: optimizelegibility;
 }
 #container {
     margin: 0px auto;

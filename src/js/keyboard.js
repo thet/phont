@@ -60,6 +60,7 @@ $(function(){
         var phon = $phonem_template.clone();
         phon.removeClass('template');
         phon.find('.char').html(character);
+        rebind_knob(phon.find('.filter .knob'));
         $write.append(phon);
 
     });
