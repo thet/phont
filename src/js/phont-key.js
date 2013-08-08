@@ -26,6 +26,10 @@ $('ul li').click(function(event) {
     } else if ($(this).hasClass('control') || $(this).hasClass('symbol') || $(this).hasClass('space')) {
         // handled elsewhere, but dont play sample
     } else {
-        playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
+    	console.log("key hit");
+    	console.log($(this).text());
+    	
+        // playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
+        playSequence(sounds, getSequenceFromString($(this).text(), characters));
     }
 });
