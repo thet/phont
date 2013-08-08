@@ -1,5 +1,6 @@
 $(function(){
     var $write = $('#write'),
+        $phonem_template = $('.phonem.template'),
         shift = false,
         capslock = false;
 
@@ -25,8 +26,9 @@ $(function(){
 
         // Delete
         if ($this.hasClass('delete')) {
-            var html = $write.html();
-            $write.html(html.substr(0, html.length - 1));
+            //var html = $write.html();
+            //$write.html(html.substr(0, html.length - 1));
+            $write.find('.phonem').last().remove();
             return false;
         }
 
@@ -53,6 +55,12 @@ $(function(){
         }
 
         // Add the character
-        $write.html($write.html() + character);
+        //$write.html($write.html() + character);
+        //
+        var phon = $phonem_template.clone();
+        phon.removeClass('template');
+        phon.find('.char').html(character);
+        $write.append(phon);
+
     });
 });
