@@ -20,7 +20,8 @@ $('ul li').click(function(event) {
             stopPlayer();
             $(this).text('play');
         } else {
-            playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
+            // playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
+            playSequence(sounds, getSequenceFromGui($("#write"), characters));
             $(this).text('stop');
         }
     } else if ($(this).hasClass('control') || $(this).hasClass('symbol') || $(this).hasClass('space')) {
