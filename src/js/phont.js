@@ -45,6 +45,8 @@ function playSample(soundbank, index, player, modifiers) {
     
     if ( ! isNaN(modifiers.playbackrate) ) {
     	player.playbackRate.setValue(modifiers.playbackrate);
+    } else {
+    	player.playbackRate.setValue( 1.0 ); // default playback rate
     }
     if ( ! isNaN(modifiers.offset) ) {
     	player.position = player.buffer.length * modifiers.offset;
@@ -166,7 +168,7 @@ function mapDomToNote(el, mapping) {
     if ((mapped_id = mapping.indexOf(myChar)) > 0) {
     	var note_data = {
 				charIndex		: mapped_id,
-				playbackrate	: parseInt($("#playbackrate", el).val()) / 100,
+				playbackrate	: parseInt($("#playbackrate", el).val()) / 50,
 				//volume			: parseInt($("#volume", el).val()) / 100,
 				offset			: parseInt($("#volume", el).val()) / 100,
 		};
