@@ -28,6 +28,6 @@ $('ul li').click(function(event) {
         // handled elsewhere, but dont play sample
     } else {
         // playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
-        playSequence(sounds, getSequenceFromString($(this).text(), characters));
+        // playSequence(sounds, getSequenceFromString($(this).text(), characters));
     }
 });

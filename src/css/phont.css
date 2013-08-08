@@ -2,15 +2,15 @@
 .phonem { position: relative;
           float: left;
           border: 1px solid black;
-          height: 10em; width: 3em;
+          height: 145px; width: 4em;
           margin-right: 0.5em;
          text-align: center;  
         }
 
 .phonem .filter { position: absolute; bottom: 0; }
-.phonem .filter input { display: block; width: 2em; height: 1em; }
+.phonem .filter input { display: block; height: 1em; }
 
-.phonem .char { font: 4em monospace; text-align: center; }
+.phonem .char { font: 6em monospace; text-align: center; }
 
 .phonem.template { display: none; }
 
