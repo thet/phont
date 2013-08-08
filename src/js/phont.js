@@ -31,7 +31,8 @@ function playSample(soundbank, note_data, player) {
     // set buffer + rewind
     player.buffer   = soundbank[note_data.charIndex];
     player.position = 0;
-
+    player.playbackRate.setValue(1.0);
+    
     //
     // possible additional params :
     //
@@ -42,13 +43,16 @@ function playSample(soundbank, note_data, player) {
     
     if ( ! isNaN(note_data.playbackrate) ) {
     	player.playbackRate.setValue(note_data.playbackrate);
-    } else {
-    	player.playbackRate.setValue( 1.0 ); // default playback rate
     }
     if ( ! isNaN(note_data.offset) ) {
     	player.position = player.buffer.length * note_data.offset;
     }
 
+    var playbacktime = ((1/player.playbackRate.getValue()) * 
+    	(player.buffer.length - player.position))
+    	/ alet.output.device.sampleRate;
+    note_data['playbacktime'] = playbacktime;
+    
     // retrigger play !
     player.playing  = true;
 
@@ -88,12 +92,15 @@ function _continueSequence(sounds, mySequence) {
         playSample(sounds, note_data, player);
     }
     
-    // set length from note data or use default length ("phont_tick")
-    var note_length = note_data.length !== undefined && note_data.length>0 ? 
-    		note_data.length : phont_tick;
+//    // set length from note data or use default length ("phont_tick")
+//    var note_length = note_data.length !== undefined && note_data.length>0 ? 
+//    		note_data.length : phont_tick;
+    
+    //var current_tick = phont_tick;
+    var current_tick = note_data["playbacktime"] * 1000;
     
     _sequence_index++;
-    setTimeout(function() { _continueSequence(sounds, mySequence)}, phont_tick);
+    setTimeout(function() { _continueSequence(sounds, mySequence)}, current_tick);
 }
 
 /**
