@@ -51,6 +51,10 @@ function playSample(soundbank, note_data, player) {
     var playbacktime = ((1/player.playbackRate.getValue()) * 
     	(player.buffer.length - player.position))
     	/ alet.output.device.sampleRate;
+    
+    if ( ! isNaN(note_data.length)) {
+    	playbacktime = playbacktime * note_data.length; 
+    }
     note_data['playbacktime'] = playbacktime;
     
     // retrigger play !
@@ -174,7 +178,8 @@ function mapDomToNote(el, mapping) {
 				charIndex		: mapped_id,
 				playbackrate	: parseInt($("#playbackrate", el).val()) / 50,
 				//volume			: parseInt($("#volume", el).val()) / 100,
-				offset			: parseInt($("#volume", el).val()) / 100,
+				offset			: parseInt($("#offset", el).val()) / 100,
+				length			: parseInt($("#length", el).val()) / 100,
 		};
     	console.log(note_data);
     	return note_data;
