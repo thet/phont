@@ -1,6 +1,18 @@
-textarea { width: 671px; height: 5em; }
-textarea:disabled { color: black; }
-textarea#write { font: 4em monospace; }
+
+.phonem { position: relative;
+          float: left;
+          border: 1px solid black;
+          height: 8em; width: 3em;
+          margin-right: 0.5em; }
+
+.phonem .filter { position: absolute; bottom: 0; }
+.phonem .filter input { display: block; width: 2em; }
+
+.phonem .char { font: 4em monospace; }
+
+.phonem.template { display: none; }
+
+#write { width: 671px; height: 200px; }
 
 
 /*
