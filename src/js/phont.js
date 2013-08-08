@@ -13,26 +13,23 @@ var _sequence_index;
 // var lobject = { charIndex: 0, offset:0, length:1.0 , smprate:1.0 }
 
 /**
- * plays sample "index" of soundbank "soundbank"
- * pass in the player and optionally modifiers (samplerate, offset etc)
  * @param soundbank array an array of samples, indexed
- * @param index int what sample index
+ * @param note_data object containing note data , esp. charIndex
  * @param player BufferPlayer the player object
- * @param modifiers object of modifiers
  */
-function playSample(soundbank, index, player, modifiers) {
+function playSample(soundbank, note_data, player) {
 
     // stop player
     player.playing  = false;
-
+    
     // check if soundbuffer ok
-    if (soundbank[index] == undefined) {
-        console.log("no sample/buffer set for " + index);
+    if (note_data.charIndex==undefined || soundbank[note_data.charIndex] == undefined) {
+        console.log("no sample/buffer set for " + note_data.charIndex);
         return;
     }
 
     // set buffer + rewind
-    player.buffer   = soundbank[index];
+    player.buffer   = soundbank[note_data.charIndex];
     player.position = 0;
 
     //
@@ -43,13 +40,13 @@ function playSample(soundbank, index, player, modifiers) {
     //      player.playbackRate.setValue(0.8);  // playback rate (~ pitch)
     //
     
-    if ( ! isNaN(modifiers.playbackrate) ) {
-    	player.playbackRate.setValue(modifiers.playbackrate);
+    if ( ! isNaN(note_data.playbackrate) ) {
+    	player.playbackRate.setValue(note_data.playbackrate);
     } else {
     	player.playbackRate.setValue( 1.0 ); // default playback rate
     }
-    if ( ! isNaN(modifiers.offset) ) {
-    	player.position = player.buffer.length * modifiers.offset;
+    if ( ! isNaN(note_data.offset) ) {
+    	player.position = player.buffer.length * note_data.offset;
     }
 
     // retrigger play !
@@ -88,7 +85,7 @@ function _continueSequence(sounds, mySequence) {
     var note_data = mySequence[_sequence_index];
     
     if ( note_data && note_data.charIndex > 0) {
-        playSample(sounds, note_data.charIndex, player, note_data);
+        playSample(sounds, note_data, player);
     }
     
     // set length from note data or use default length ("phont_tick")
