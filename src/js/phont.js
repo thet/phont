@@ -42,6 +42,13 @@ function playSample(soundbank, index, player, modifiers) {
     //      player.position = player.buffer.length * 0.5;   // offset relative to sample length
     //      player.playbackRate.setValue(0.8);  // playback rate (~ pitch)
     //
+    
+    if ( ! isNaN(modifiers.playbackrate) ) {
+    	player.playbackRate.setValue(modifiers.playbackrate);
+    }
+    if ( ! isNaN(modifiers.offset) ) {
+    	player.position = player.buffer.length * modifiers.offset;
+    }
 
     // retrigger play !
     player.playing  = true;
@@ -59,8 +66,8 @@ function stopPlayer() {
  * @param sequence
  */
 function playSequence(sounds, sequence) {
-	console.log("begin play sequence");
-	console.log(sequence); 
+	//console.log("begin play sequence");
+	//console.log(sequence); 
 	_sequence_index = 0;
     _continueSequence(sounds, sequence);
 }
@@ -72,15 +79,19 @@ function playSequence(sounds, sequence) {
  */
 function _continueSequence(sounds, mySequence) {
     // console.log("playing " + mySequence[_sequence_index] + " at " + _sequence_index);
-
+	
     if (_sequence_index < 0) return;   // signal to stop
-    if (_sequence_index > mySequence.length-1) return;  // sequence finished
+    if (mySequence==undefined || _sequence_index > mySequence.length-1) return;  // sequence finished
     
     var note_data = mySequence[_sequence_index];
     
-    if ( note_data.charIndex > 0) {
+    if ( note_data && note_data.charIndex > 0) {
         playSample(sounds, note_data.charIndex, player, note_data);
     }
+    
+    // set length from note data or use default length ("phont_tick")
+    var note_length = note_data.length !== undefined && note_data.length>0 ? 
+    		note_data.length : phont_tick;
     
     _sequence_index++;
     setTimeout(function() { _continueSequence(sounds, mySequence)}, phont_tick);
@@ -125,18 +136,61 @@ function initPlayer(initObject) {
  * @returns Array[{obj}]
  */
 function getSequenceFromString(strsequ, mapping) {
-    
-	var intsequ = [];
+	// console.log(strsequ);
 	var mapped_id;
 	var rich_sequence = [];
-    
     for ( var i=0; i<strsequ.length; i++) {
         if (strsequ[i] == ':') continue;    // ignore ':'
-        if (strsequ[i] == ' ') intsequ.push({charIndex:0}); // space -> 0
+        if (strsequ[i] == ' ') rich_sequence.push({charIndex:0}); // space -> 0
 
         if ((mapped_id = mapping.indexOf(strsequ[i])) > 0) {
-            intsequ.push({charIndex:mapped_id});
+        	rich_sequence.push({charIndex:mapped_id});
         }
     }
-    return intsequ;
+    return rich_sequence;
 }
+
+function getSequenceFromGui(parent, mapping) {
+	var rich_sequence = [];
+	$(".phonem",$(parent)).each(function(ind,obj) {
+		rich_sequence.push(mapDomToNote(obj, mapping));
+	});
+	// console.log(rich_sequence);
+	return rich_sequence;
+}
+
+function mapDomToNote(el, mapping) {
+	el = $(el);
+	var myChar = $(".char", el).first().text();
+
+    if ((mapped_id = mapping.indexOf(myChar)) > 0) {
+    	var note_data = {
+				charIndex		: mapped_id,
+				playbackrate	: parseInt($("#playbackrate", el).val()) / 100,
+				//volume			: parseInt($("#volume", el).val()) / 100,
+				offset			: parseInt($("#volume", el).val()) / 100,
+		};
+    	console.log(note_data);
+    	return note_data;
+    }
+}
+
+//function NoteData(init, initMap) {
+//	this.charIndex=0;
+//	this.length=;
+//	this.sample_rate = 1.0;
+//	this.offset=0.0;
+//	
+//	this.setAll = function(mapdata) {
+//		// do mapping from data
+//		// (default mapping)
+//	};
+//	
+//	if (initMap != undefined) {
+//		// possibility to pass in mapper
+//		this.setAll = initMap;
+//	}
+//	
+//	// call mapper on init data
+//	this.setAll(init);
+//}

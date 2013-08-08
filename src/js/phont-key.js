@@ -20,15 +20,13 @@ $('ul li').click(function(event) {
             stopPlayer();
             $(this).text('play');
         } else {
-            playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
+            // playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
+            playSequence(sounds, getSequenceFromGui($("#write"), characters));
             $(this).text('stop');
         }
     } else if ($(this).hasClass('control') || $(this).hasClass('symbol') || $(this).hasClass('space')) {
         // handled elsewhere, but dont play sample
     } else {
-    	console.log("key hit");
-    	console.log($(this).text());
-    	
         // playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
         playSequence(sounds, getSequenceFromString($(this).text(), characters));
     }
