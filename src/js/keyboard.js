@@ -61,6 +61,9 @@ $(function(){
         phon.removeClass('template');
         phon.find('.char').html(character);
         rebind_knob(phon.find('.filter .knob'));
+
+        playSample(sounds, mapDomToNote(phon, characters), player);
+
         $write.append(phon);
 
     });
