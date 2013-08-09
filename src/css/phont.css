@@ -7,7 +7,10 @@
         }
 .phonem:hover { background: #CCCCCC; }
 .phonem > div { margin: auto; margin-bottom: 5px; }
-.phonem .char { font: 5em sans-serif; line-height: 1em; text-align: center; }
+.phonem .char {
+    font-size: 5em; line-height: 1em; text-align: center;
+    font-family: 'Merriweather Sans', sans-serif;
+}
 .phonem.template { display: none; }
 
 #write { width: 671px; min-height: 200px; height:auto; }
@@ -30,8 +33,9 @@
 /* keyboard customizations */
 body {
     background: #e0ddaa;
-    margin: 100px auto;
+    margin: 20px auto;
     text-rendering: optimizelegibility;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 #container {
     margin: 0px auto;
