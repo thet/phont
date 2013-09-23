@@ -1,16 +1,18 @@
 
-.phonem { position: relative;
-          display: inline-block;
+.phonem { display: inline-block;
           text-align: center;
           margin: 0;
           padding: 0;
         }
-.phonem:hover { background: #CCCCCC; }
+.phonem:hover { background: #CCC; }
 .phonem > div { margin: auto; margin-bottom: 5px; }
 .phonem .char {
     font-size: 5em; line-height: 1em; text-align: center;
     font-family: 'Merriweather Sans', sans-serif;
 }
+.phonem .filterwrapper { position: relative; }
+.phonem .filter { display: none; position: absolute; background: #CCC; }
+.phonem:hover .filter { display: block; }
 .phonem.template { display: none; }
 
 #write { width: 671px; min-height: 200px; height:auto; }
