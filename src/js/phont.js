@@ -65,6 +65,7 @@ function playSample(soundbank, note_data, player) {
 
 function stopPlayer() {
     _sequence_index = -1;
+    $(window).trigger('phont_stop_player');
 }
 
 /**
@@ -75,6 +76,7 @@ function stopPlayer() {
 function playSequence(sounds, sequence) {
 	//console.log("begin play sequence");
 	//console.log(sequence); 
+    $(window).trigger('phont_start_player');
 	_sequence_index = 0;
     _continueSequence(sounds, sequence);
 }

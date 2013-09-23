@@ -1,3 +1,14 @@
+$(window).bind('phont_stop_player', function () {
+    $('.play').each(function () {
+        $(this).text('play');
+    });
+});
+$(window).bind('phont_start_player', function () {
+    $('.play').each(function () {
+        $(this).text('stop');
+    });
+});
+
 $(window).keydown(function(event) {
     var button = $("ul").find("li[data-keycode='" + event.which + "']");
     if (button.length>0) {
@@ -18,16 +29,8 @@ $('ul li').click(function(event) {
     if ($(this).hasClass('play')) {
         if ($(this).text() === 'stop') {
             stopPlayer();
-            $(this).text('play');
         } else {
-            // playSequence(sounds, getSequenceFromString($("#container textarea").text(), characters));
             playSequence(sounds, getSequenceFromGui($("#write"), characters));
-            $(this).text('stop');
         }
-    } else if ($(this).hasClass('control') || $(this).hasClass('symbol') || $(this).hasClass('space')) {
-        // handled elsewhere, but dont play sample
-    } else {
-        // playSample(sounds, getSequenceFromString($(this).text(), characters)[0], player);
-        // playSequence(sounds, getSequenceFromString($(this).text(), characters));
     }
 });
