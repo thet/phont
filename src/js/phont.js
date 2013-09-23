@@ -23,7 +23,7 @@ function playSample(soundbank, note_data, player) {
     player.playing  = false;
     
     // check if soundbuffer ok
-    if (note_data.charIndex==undefined || soundbank[note_data.charIndex] == undefined) {
+    if (note_data.charIndex === undefined || soundbank[note_data.charIndex] === undefined) {
         console.log("no sample/buffer set for " + note_data.charIndex);
         return;
     }
@@ -42,20 +42,20 @@ function playSample(soundbank, note_data, player) {
     //
     
     if ( ! isNaN(note_data.playbackrate) ) {
-    	player.playbackRate.setValue(note_data.playbackrate);
+        player.playbackRate.setValue(note_data.playbackrate);
     }
     if ( ! isNaN(note_data.offset) ) {
-    	player.position = player.buffer.length * note_data.offset;
+        player.position = player.buffer.length * note_data.offset;
     }
 
     var playbacktime = ((1/player.playbackRate.getValue()) * 
-    	(player.buffer.length - player.position))
-    	/ alet.output.device.sampleRate;
+        (player.buffer.length - player.position))
+        / alet.output.device.sampleRate;
     
     if ( ! isNaN(note_data.length)) {
-    	playbacktime = playbacktime * note_data.length; 
+        playbacktime = playbacktime * note_data.length; 
     }
-    note_data['playbacktime'] = playbacktime;
+    note_data.playbacktime = playbacktime;
     
     // retrigger play !
     player.playing  = true;
@@ -74,10 +74,10 @@ function stopPlayer() {
  * @param sequence
  */
 function playSequence(sounds, sequence) {
-	//console.log("begin play sequence");
-	//console.log(sequence); 
+    //console.log("begin play sequence");
+    //console.log(sequence); 
     $(window).trigger('phont_start_player');
-	_sequence_index = 0;
+    _sequence_index = 0;
     _continueSequence(sounds, sequence);
 }
 
@@ -88,9 +88,13 @@ function playSequence(sounds, sequence) {
  */
 function _continueSequence(sounds, mySequence) {
     // console.log("playing " + mySequence[_sequence_index] + " at " + _sequence_index);
-	
-    if (_sequence_index < 0) return;   // signal to stop
-    if (mySequence==undefined || _sequence_index > mySequence.length-1) return;  // sequence finished
+    
+    if (_sequence_index < 0) {
+        return;   // signal to stop
+    }
+    if (mySequence === undefined || _sequence_index > mySequence.length - 1) {
+        return;  // sequence finished
+    }
     
     var note_data = mySequence[_sequence_index];
     
@@ -98,15 +102,16 @@ function _continueSequence(sounds, mySequence) {
         playSample(sounds, note_data, player);
     }
     
-//    // set length from note data or use default length ("phont_tick")
-//    var note_length = note_data.length !== undefined && note_data.length>0 ? 
-//    		note_data.length : phont_tick;
+    //// set length from note data or use default length ("phont_tick")
+    //var note_length = note_data.length !== undefined && note_data.length>0 ? note_data.length : phont_tick;
     
     //var current_tick = phont_tick;
-    var current_tick = note_data["playbacktime"] * 1000;
+    var current_tick = note_data.playbacktime * 1000;
     
     _sequence_index++;
-    setTimeout(function() { _continueSequence(sounds, mySequence)}, current_tick);
+    setTimeout(function () {
+        _continueSequence(sounds, mySequence);
+    }, current_tick);
 }
 
 /**
@@ -115,7 +120,7 @@ function _continueSequence(sounds, mySequence) {
  */
 function initPlayer(initObject) {
 
-    var alet, player;
+    var alet, player, i;
     alet = new Audiolet();
 
     var sound_map = [];
@@ -131,11 +136,11 @@ function initPlayer(initObject) {
     }
 
     player = new BufferPlayer(alet,
-            sound_map[1],
-            0.8,  // sample rate
-            0,  // start pos
-            0   // loop ?
-            );
+        sound_map[1],
+        0.8,  // sample rate
+        0,  // start pos
+        0   // loop ?
+    );
 
     player.playing = false;
     player.connect(alet.output);
@@ -148,62 +153,65 @@ function initPlayer(initObject) {
  * @returns Array[{obj}]
  */
 function getSequenceFromString(strsequ, mapping) {
-	// console.log(strsequ);
-	var mapped_id;
-	var rich_sequence = [];
-    for ( var i=0; i<strsequ.length; i++) {
-        if (strsequ[i] == ':') continue;    // ignore ':'
-        if (strsequ[i] == ' ') rich_sequence.push({charIndex:0}); // space -> 0
-
+    // console.log(strsequ);
+    var mapped_id, i;
+    var rich_sequence = [];
+    for (i=0; i<strsequ.length; i++) {
+        if (strsequ[i] === ':') {
+            continue;    // ignore ':'
+        }
+        if (strsequ[i] === ' ') {
+            rich_sequence.push({charIndex:0}); // space -> 0
+        }
         if ((mapped_id = mapping.indexOf(strsequ[i])) > 0) {
-        	rich_sequence.push({charIndex:mapped_id});
+            rich_sequence.push({charIndex:mapped_id});
         }
     }
     return rich_sequence;
 }
 
 function getSequenceFromGui(parent, mapping) {
-	var rich_sequence = [];
-	$(".phonem",$(parent)).each(function(ind,obj) {
-		rich_sequence.push(mapDomToNote(obj, mapping));
-	});
-	// console.log(rich_sequence);
-	return rich_sequence;
+    var rich_sequence = [];
+    $(".phonem",$(parent)).each(function(ind,obj) {
+        rich_sequence.push(mapDomToNote(obj, mapping));
+    });
+    // console.log(rich_sequence);
+    return rich_sequence;
 }
 
 function mapDomToNote(el, mapping) {
-	el = $(el);
-	var myChar = $(".char", el).first().text();
+    el = $(el);
+    var myChar = $(".char", el).first().text();
 
     if ((mapped_id = mapping.indexOf(myChar)) > 0) {
-    	var note_data = {
-				charIndex		: mapped_id,
-				playbackrate	: parseInt($("#playbackrate", el).val()) / 50,
-				//volume			: parseInt($("#volume", el).val()) / 100,
-				offset			: parseInt($("#offset", el).val()) / 100,
-				length			: parseInt($("#length", el).val()) / 100,
-		};
-    	console.log(note_data);
-    	return note_data;
+        var note_data = {
+                charIndex       : mapped_id,
+                playbackrate    : parseInt($("#playbackrate", el).val(), 10) / 50,
+                //volume            : parseInt($("#volume", el).val()) / 100,
+                offset          : parseInt($("#offset", el).val(), 10) / 100,
+                length          : parseInt($("#length", el).val(), 10) / 100,
+        };
+        console.log(note_data);
+        return note_data;
     }
 }
 
 //function NoteData(init, initMap) {
-//	this.charIndex=0;
-//	this.length=;
-//	this.sample_rate = 1.0;
-//	this.offset=0.0;
-//	
-//	this.setAll = function(mapdata) {
-//		// do mapping from data
-//		// (default mapping)
-//	};
-//	
-//	if (initMap != undefined) {
-//		// possibility to pass in mapper
-//		this.setAll = initMap;
-//	}
-//	
-//	// call mapper on init data
-//	this.setAll(init);
+//  this.charIndex=0;
+//  this.length=;
+//  this.sample_rate = 1.0;
+//  this.offset=0.0;
+//  
+//  this.setAll = function(mapdata) {
+//      // do mapping from data
+//      // (default mapping)
+//  };
+//  
+//  if (initMap != undefined) {
+//      // possibility to pass in mapper
+//      this.setAll = initMap;
+//  }
+//  
+//  // call mapper on init data
+//  this.setAll(init);
 //}
