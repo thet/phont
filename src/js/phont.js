@@ -93,6 +93,7 @@ function _continueSequence(sounds, mySequence) {
         return;   // signal to stop
     }
     if (mySequence === undefined || _sequence_index > mySequence.length - 1) {
+        $(window).trigger('phont_stop_player');
         return;  // sequence finished
     }
     
