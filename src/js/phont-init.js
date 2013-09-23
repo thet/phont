@@ -2,50 +2,54 @@
 // ( or load from external file @see data/setup.json )
 var testsetup = {
     phonemes_list:[
-        {id:1, char:'ʌ', sound:'data/phonemes/phoneme_15_2009-10-09_05-33-54.wav'},
-        {id:2, char:'ɑ:', sound:'data/phonemes/phoneme_49_2009-10-22_17-27-19.wav'},
-        {id:3, char:'æ', sound:'data/phonemes/phoneme_19_2009-10-21_10-31-10.wav'},
-        {id:4, char:'e', sound:'data/phonemes/phoneme_53_2009-10-23_10-31-04.wav'},
-        {id:5, char:'ə', sound:'data/phonemes/phoneme_2_2009-10-08_08-37-54.wav'},
-        {id:6, char:'ɜ:', sound:'data/phonemes/phoneme_55_2009-10-23_10-43-20.wav'},
-        {id:7, char:'ɪ', sound:'data/phonemes/phoneme_23_2009-10-23_11-02-48.wav'},
-        {id:8, char:'i:', sound:'data/phonemes/phoneme_44_2009-10-22_16-42-12.wav'},
-        {id:9, char:'ɒ', sound:'data/phonemes/phoneme_26_2009-10-23_11-21-41.wav'},
-        {id:10, char:'ɔ:', sound:'data/phonemes/phoneme_45_2009-10-22_17-17-39.wav'},
-        {id:11, char:'ʊ', sound:'data/phonemes/phoneme_28_2009-10-23_11-06-28.wav'},
-        {id:12, char:'u:', sound:'data/phonemes/phoneme_56_2009-10-23_10-46-47.wav'},
-        {id:13, char:'aɪ', sound:'data/phonemes/phoneme_30_2009-10-21_10-23-00.wav'},
-        {id:14, char:'aʊ', sound:'data/phonemes/phoneme_31_2009-10-21_10-30-25.wav'},
-        {id:15, char:'eɪ', sound:'data/phonemes/phoneme_3_2009-10-08_08-54-10.wav'},
-        {id:16, char:'oʊ', sound:'data/phonemes/phoneme_32_2009-10-21_10-35-23.wav'},
-        {id:17, char:'ɔɪ', sound:'data/phonemes/phoneme_33_2009-10-21_10-45-21.wav'},
-        {id:18, char:'eə', sound:'data/phonemes/phoneme_34_2009-10-21_10-46-23.wav'},
-        {id:19, char:'ɪə', sound:'data/phonemes/phoneme_35_2009-10-22_13-57-03.wav'},
-        {id:20, char:'ʊə', sound:'data/phonemes/phoneme_36_2009-10-22_13-57-32.wav'},
-        {id:21, char:'b', sound:'data/phonemes/phoneme_37_2009-10-22_15-24-50.wav'},
-        {id:22, char:'d', sound:'data/phonemes/phoneme_38_2009-10-22_15-32-42.wav'},
-        {id:23, char:'f', sound:'data/phonemes/phoneme_39_2009-10-22_16-07-48.wav'},
-        {id:24, char:'g', sound:'data/phonemes/phoneme_40_2009-10-22_16-21-31.wav'},
-        {id:25, char:'h', sound:'data/phonemes/phoneme_56_2009-10-23_10-46-47.wav'},
-        {id:43, char:'j', sound:'data/phonemes/phoneme_41_2009-10-22_16-25-36.wav'},
-        {id:26, char:'k', sound:'data/phonemes/phoneme_4_2009-10-08_08-58-28.wav'},
-        {id:27, char:'l', sound:'data/phonemes/phoneme_42_2009-10-22_16-34-34.wav'},
-        {id:28, char:'m', sound:'data/phonemes/phoneme_43_2009-10-22_16-34-50.wav'},
-        {id:29, char:'n', sound:'data/phonemes/phoneme_44_2009-10-22_16-42-12.wav'},
-        {id:30, char:'ŋ', sound:'data/phonemes/phoneme_45_2009-10-22_17-17-39.wav'},
-        {id:31, char:'r', sound:'data/phonemes/phoneme_46_2009-10-22_17-22-07.wav'},
-        {id:32, char:'s', sound:'data/phonemes/phoneme_47_2009-10-22_17-23-36.wav'},
-        {id:33, char:'ʃ', sound:'data/phonemes/phoneme_48_2009-10-22_17-24-55.wav'},
-        {id:34, char:'t', sound:'data/phonemes/phoneme_49_2009-10-22_17-27-19.wav'},
-        {id:35, char:'tʃ', sound:'data/phonemes/phoneme_50_2009-10-22_17-28-24.wav'},
-        {id:36, char:'θ', sound:'data/phonemes/phoneme_51_2009-10-22_17-30-40.wav'},
-        {id:37, char:'ð', sound:'data/phonemes/phoneme_5_2009-10-08_09-01-16.wav'},
-        {id:38, char:'v', sound:'data/phonemes/phoneme_52_2009-10-23_10-20-31.wav'},
-        {id:39, char:'w', sound:'data/phonemes/phoneme_53_2009-10-23_10-31-04.wav'},
-        {id:40, char:'z', sound:'data/phonemes/phoneme_54_2009-10-23_10-40-04.wav'},
-        {id:41, char:'ʒ', sound:'data/phonemes/phoneme_55_2009-10-23_10-43-20.wav'},
-        {id:42, char:'dʒ', sound:'data/phonemes/phoneme_56_2009-10-23_10-46-47.wav'},
-        {id:44, char:' ', sound:'data/silence.wav'},
+        {id:1,  char:'aɪ̯',   sound:'data/phonemes/1. aɪ̯ (Y).wav'},
+        {id:2,  char:'aʊ̯',    sound:'data/phonemes/2. aʊ̯ (Y).wav'},
+        {id:3,  char:'ɔʏ̯',    sound:'data/phonemes/3. ɔʏ̯ (Y).wav'},
+        {id:4,  char:'eəʳ',    sound:'data/phonemes/4. eəʳ (Y).wav'},
+        {id:5,  char:'ʊəʳ',    sound:'data/phonemes/5. ʊəʳ (Y).wav'},
+        {id:6,  char:'ɪəʳ', sound:'data/phonemes/6. ɪəʳ (Y).wav'},
+        {id:7,  char:'ʁ',  sound:'data/phonemes/7. ʁ (Y).wav'},
+        {id:8,  char:'ɹ',  sound:'data/phonemes/8. ɹ (Y).wav'},
+        {id:9,  char:'r',  sound:'data/phonemes/9. r (Y).wav'},
+        {id:10, char:'ð',   sound:'data/phonemes/10. ð (Y).wav'},
+        {id:11, char:'ç',   sound:'data/phonemes/11. ç (Y).wav'},
+        {id:12, char:'s',   sound:'data/phonemes/12. s (Y).wav'},
+        {id:13, char:'tʃ',   sound:'data/phonemes/13. tʃ (Y).wav'},
+        {id:14, char:'e',   sound:'data/phonemes/14. e (Y).wav'},
+        {id:15, char:'œ',   sound:'data/phonemes/15. œ (Y).wav'},
+        {id:16, char:'ɛ',   sound:'data/phonemes/16. ɛ (Y).wav'},
+        {id:17, char:'i',   sound:'data/phonemes/17. i (Y).wav'},
+        {id:18, char:'ʒ',   sound:'data/phonemes/18. ʒ (Y).wav'},
+        {id:19, char:'z',   sound:'data/phonemes/19. z (Y).wav'},
+        {id:20, char:'dʒ',   sound:'data/phonemes/20. dʒ (Y).wav'},
+        {id:21, char:'m',   sound:'data/phonemes/21. m (Y).wav'},
+        {id:22, char:'w',   sound:'data/phonemes/22. w (Y).wav'},
+        {id:23, char:'p',   sound:'data/phonemes/23. p (Y).wav'},
+        {id:24, char:'k',   sound:'data/phonemes/24. k (Y).wav'},
+        {id:25, char:'ʃ',   sound:'data/phonemes/25. ʃ (Y).wav'},
+        {id:26, char:'h',   sound:'data/phonemes/26. h (Y).wav'},
+        {id:27, char:'ɑ',   sound:'data/phonemes/27. ɑ (Y).wav'},
+        {id:28, char:'ɐ',   sound:'data/phonemes/28. ɐ (Y).wav'},
+        {id:29, char:'o',   sound:'data/phonemes/29. o (Y).wav'},
+        {id:30, char:'y',   sound:'data/phonemes/30. y (Y).wav'},
+        {id:31, char:'g',   sound:'data/phonemes/31. g (Y).wav'},
+        {id:32, char:'d',   sound:'data/phonemes/32. d (Y).wav'},
+        {id:33, char:'j',   sound:'data/phonemes/33. j (Y).wav'},
+        {id:34, char:'ŋ',   sound:'data/phonemes/34. ŋ (Y).wav'},
+        {id:35, char:'l',   sound:'data/phonemes/35. l (Y).wav'},
+        {id:36, char:'t',   sound:'data/phonemes/36. t (Y).wav'},
+        {id:37, char:'f',   sound:'data/phonemes/37. f (Y).wav'},
+        {id:38, char:'ɜʳ',   sound:'data/phonemes/38. ɜʳ (Y).wav'},
+        {id:39, char:'ʌ',   sound:'data/phonemes/39. ʌ (Y).wav'},
+        {id:40, char:'ʊ',   sound:'data/phonemes/40. ʊ (Y).wav'},
+        {id:41, char:'v',   sound:'data/phonemes/41. v (Y).wav'},
+        {id:42, char:'b',   sound:'data/phonemes/42. b (Y).wav'},
+        {id:43, char:'n',   sound:'data/phonemes/43. n (Y).wav'},
+        {id:44, char:',',   sound:'data/phonemes/44. Beistrich (Y).wav'},
+        {id:45, char:'.',   sound:'data/phonemes/45. Punkt (Y).wav'},
+        {id:46, char:'?',   sound:'data/phonemes/46. Fragezeichen (Y).wav'},
+        {id:47, char:'!',   sound:'data/phonemes/47. Rufzeichen (Y).wav'},
+        {id:48, char:' ',  sound:'data/silence.wav'},
     ]};
 
 // get two mappings
@@ -54,3 +58,63 @@ var sounds      = playerdat[0];
 var characters  = playerdat[1];
 var player      = playerdat[2];
 var alet        = playerdat[3];
+
+
+
+
+
+
+
+
+
+/*
+aɪ̯
+aʊ̯
+ɔʏ̯
+eəʳ
+ʊəʳ
+ɪəʳ
+ʁ
+ɹ
+r
+ð
+ç
+s
+tʃ
+e
+œ
+ɛ
+i
+ʒ
+z
+dʒ
+m
+w
+p
+k
+ʃ
+h
+ɑ
+ɐ
+o
+y
+g
+d
+j
+ŋ
+l
+t
+f
+ɜʳ
+ʌ
+ʊ
+v
+b
+n
+,
+.
+?
+!
+*/
+
+
