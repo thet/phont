@@ -1,9 +1,9 @@
 
 .phonem { position: relative;
           display: inline-block;
-          margin: 0 5px 5px 0;
           text-align: center;
-          padding: 0 5px 0 5px;
+          margin: 0;
+          padding: 0;
         }
 .phonem:hover { background: #CCCCCC; }
 .phonem > div { margin: auto; margin-bottom: 5px; }
