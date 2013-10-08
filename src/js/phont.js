@@ -120,10 +120,8 @@ function _continueSequence(sounds, mySequence) {
  * @param initObject
  */
 function initPlayer(initObject) {
-
     var alet, player, i;
     alet = new Audiolet();
-
     var sound_map = [];
     var repr_map = [];
     for (i in initObject.phonemes_list) {
@@ -171,6 +169,20 @@ function getSequenceFromString(strsequ, mapping) {
     return rich_sequence;
 }
 
+var recorder;
+function recordStart() {
+	recorder = player.audiolet.output.device.sink.record();
+}
+function recordStop() {
+	recorder.stop();
+	return recorder.join();
+}
+
+/**
+ * transform phoneme list / -sheet into sequence of ids
+ * @param strsequ
+ * @returns Array[{obj}]
+ */
 function getSequenceFromGui(parent, mapping) {
     var rich_sequence = [];
     $(".phonem",$(parent)).each(function(ind,obj) {
@@ -180,6 +192,12 @@ function getSequenceFromGui(parent, mapping) {
     return rich_sequence;
 }
 
+/**
+ * map a gui element representing a note to internal note-representation
+ * @param el
+ * @param mapping
+ * @returns {___anonymous5556_5928}
+ */
 function mapDomToNote(el, mapping) {
     el = $(el);
     var myChar = $(".char", el).first().text();
@@ -192,10 +210,14 @@ function mapDomToNote(el, mapping) {
                 offset          : parseInt($("#offset", el).val(), 10) / 100,
                 length          : parseInt($("#length", el).val(), 10) / 100,
         };
-        console.log(note_data);
+        // console.log(note_data);
         return note_data;
     }
 }
+
+//function mapNoteToDom(note, mapping) {
+//
+//}
 
 //function NoteData(init, initMap) {
 //  this.charIndex=0;
