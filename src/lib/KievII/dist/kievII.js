@@ -1,4 +1,9 @@
-(function () {
+(function(factory) {
+  if (typeof define == 'function' && define.amd)
+    define(['hammer'], factory);
+  else
+    window.K2 = window.KievII = factory(window.Hammer);
+})(function(hammer) {
 
 /* The K2 element! */
 var K2 = {};
@@ -432,11 +437,11 @@ K2.UI = function(engine, parameters) {
     this.domElement = eventTarget;
 
 	// Hammer.js is present
-	if (typeof K2.Hammer === 'undefined') {
+	if (typeof hammer === 'undefined') {
 		throw ("Hammer.js needed!");
 	}
 	
-	this.hammer = new K2.Hammer(this.domElement, {drag_min_distance: 2});
+	this.hammer = new hammer(this.domElement, {drag_min_distance: 2});
 
     var hammerEvent = this.onHammerEvent();
     this.hammer.on("dragstart drag dragend swipe tap doubletap hold transformstart transform transformend touch release", hammerEvent);
@@ -5455,22 +5460,5 @@ K2.CanvasUtils.drawRotate = function (ctx, args /*{image, x, y, rot}*/) {
     ctx.drawImage(args.image, args.x, args.y);
     ctx.restore();
 };
-if (typeof define === "function" && define.amd) {
-  0;  
-  define(["hammerjs"], function(Hammer) {
-    0;
-    K2.Hammer = Hammer;
-    return K2;
-  });
-}
-else {
-    0;
-    // Check if Hammer.js is present
-	if (typeof window.Hammer === 'undefined') {
-		throw ("Hammer.js needed!");
-	}
-	K2.Hammer = window.Hammer;
-    window.kievII = window.K2 = K2;
-}
-
-})();
+return K2;
+});

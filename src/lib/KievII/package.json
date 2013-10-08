@@ -1,6 +1,6 @@
 {
   "name": "kievII",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Javascript library for web and mobile audio applications developers",
   "main": "dist/kievII.js",
   "directories": {
@@ -27,10 +27,19 @@
     "plugins",
     "hyacinth"
   ],
+  "dependencyMap": {
+    "hammer": "github:EightMedia/hammer.js@1.0.0/dist/hammer"
+  },
   "author": "Cristiano Belloni (Jane's Conference)",
   "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/janesconference/KievII/issues"
+  },
+  "buildConfig": {
+    "uglify": true
+  },
+   "directories": {
+    "lib": "dist"
   }
 }

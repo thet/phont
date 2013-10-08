@@ -55,10 +55,11 @@ body {
 #keyboard .return {
     width: 77px;
 }
-#keyboard .left-shift {
+
+#keyboard .left.gendershift {
     width: 95px;
 }
-#keyboard .right-shift {
+#keyboard .right.gendershift {
     width: 109px;
 }
 .lastitem {
