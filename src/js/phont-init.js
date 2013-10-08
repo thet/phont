@@ -114,7 +114,37 @@ var alet        = playerdat[3];
 
 
 
+//
+//var rec =  alet.output.device.sink.record()
+//rec.stop();
+//var buf = rec.join();
+//for (i in buf) console.log(buf[i]); ...
+//
+//
 
+
+//// sink test : 
+//var k, v, n = 0;
+//var sink = Sink(function(buffer, channelCount){
+//    for (var j=0; j<buffer.length; j+=2, n++) {
+//            v = Math.sin(k*n);
+//            buffer[j] = v;
+//            buffer[j+1] = v;
+//        }
+//}, 2); // 2 channels ... which is already the default
+//
+//k = 2*Math.PI*440/sink.sampleRate;
+//
+//var recording = sink.record();
+//
+////And when you want to stop recording:
+//
+//recording.stop();
+//
+////To join the recording into a single buffer:
+//
+//var buffer = recording.join();
+// https://github.com/jussi-kalliokoski/sink.js/
 
 
 
