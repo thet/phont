@@ -180,7 +180,8 @@ function recordStop() {
 
 /**
  * transform phoneme list / -sheet into sequence of ids
- * @param strsequ
+ * @param parent element that contains the notes in donm representations
+ * @param mapping character-mapping, as returned by initPlayer
  * @returns Array[{obj}]
  */
 function getSequenceFromGui(parent, mapping) {
@@ -205,6 +206,7 @@ function mapDomToNote(el, mapping) {
     if ((mapped_id = mapping.indexOf(myChar)) > 0) {
         var note_data = {
                 charIndex       : mapped_id,
+                character		: myChar,
                 playbackrate    : parseInt($("#playbackrate", el).val(), 10) / 50,
                 //volume            : parseInt($("#volume", el).val()) / 100,
                 offset          : parseInt($("#offset", el).val(), 10) / 100,
@@ -215,9 +217,39 @@ function mapDomToNote(el, mapping) {
     }
 }
 
-//function mapNoteToDom(note, mapping) {
-//
-//}
+function setSequenceToGui(parent, seq) {
+	
+	var template = $('.phonem.template'),
+		phon;
+	for ( var i in seq) {
+		phon = mapNoteToDom(seq[i], template);
+		$(parent).append(phon);
+	}
+}
+
+function mapNoteToDom(note, template) {
+	
+	// clone template
+    var phon = $(template).clone();
+    phon.removeClass('template');
+    
+    // set character and filter parameters
+    phon.find('.char').html(note.character);
+    $("#playbackrate", $(phon)).val(note.playbackrate * 50);
+    $("#offset", $(phon)).val(note.offset * 100);
+    $("#length", $(phon)).val(note.length * 100);
+    
+    // knobify + return
+    rebind_knob(phon.find('.filter.knob'));
+    return phon;
+}
+
+
+// var save_str = JSON.stringify(getSequenceFromGui($("#write"), characters));
+
+// setSequenceToGui($("#write"), JSON.parse(save_str));
+
+
 
 //function NoteData(init, initMap) {
 //  this.charIndex=0;
