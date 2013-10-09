@@ -9,6 +9,21 @@ var phont_tick = 400;
 var _sequence_index;
 
 
+function sink_grab_recording() {
+	return alet.output.device.sink.activeRecordings[0];
+}
+
+function sink_join_buffers(rec) {
+	var l = rec.buffers.length;
+	var bigarray = Array();
+	for (i=0; i<l; i++) {
+		for(k in rec.buffers[i]) {
+			bigarray.push(rec.buffers[i][k]);
+		}
+	}
+	return bigarray;
+}
+
 
 // var lobject = { charIndex: 0, offset:0, length:1.0 , smprate:1.0 }
 
@@ -170,12 +185,28 @@ function getSequenceFromString(strsequ, mapping) {
 }
 
 var recorder;
+var myrecbuf = [];
+var firstbuf = false;
 function recordStart() {
-	recorder = player.audiolet.output.device.sink.record();
+	
+	player.audiolet.output.device.sink.altRecord = function() { 
+		var rec = this.record();
+		rec.simpleBuffer = [];
+		rec.add = function(buffer) { 
+			if (!firstbuf) firstbuf = buffer;
+			 rec.simpleBuffer.push(buffer);
+			 myrecbuf.push(buffer);
+			 console.log(rec.simpleBuffer[rec.simpleBuffer.length-1][0])
+		} 
+		
+		return rec; 
+	}
+	
+	recorder = player.audiolet.output.device.sink.altRecord();
 }
 function recordStop() {
 	recorder.stop();
-	return recorder.join();
+	return recorder;
 }
 
 /**
