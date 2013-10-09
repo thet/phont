@@ -21,18 +21,19 @@ function playSample(soundbank, note_data, player) {
 
     // stop player
     player.playing  = false;
-    
+
+    var sb = note_data.soundbank;
     // check if soundbuffer ok
-    if (note_data.charIndex === undefined || soundbank[note_data.charIndex] === undefined) {
+    if (note_data.charIndex === undefined || soundbank[sb][note_data.charIndex] === undefined) {
         console.log("no sample/buffer set for " + note_data.charIndex);
         return;
     }
 
     // set buffer + rewind
-    player.buffer   = soundbank[note_data.charIndex];
+    player.buffer   = soundbank[sb][note_data.charIndex];
     player.position = 0;
     player.playbackRate.setValue(1.0);
-    
+
     //
     // possible additional params :
     //
@@ -40,7 +41,7 @@ function playSample(soundbank, note_data, player) {
     //      player.position = player.buffer.length * 0.5;   // offset relative to sample length
     //      player.playbackRate.setValue(0.8);  // playback rate (~ pitch)
     //
-    
+
     if ( ! isNaN(note_data.playbackrate) ) {
         player.playbackRate.setValue(note_data.playbackrate);
     }
@@ -48,15 +49,15 @@ function playSample(soundbank, note_data, player) {
         player.position = player.buffer.length * note_data.offset;
     }
 
-    var playbacktime = ((1/player.playbackRate.getValue()) * 
+    var playbacktime = ((1/player.playbackRate.getValue()) *
         (player.buffer.length - player.position))
         / alet.output.device.sampleRate;
-    
+
     if ( ! isNaN(note_data.length)) {
-        playbacktime = playbacktime * note_data.length; 
+        playbacktime = playbacktime * note_data.length;
     }
     note_data.playbacktime = playbacktime;
-    
+
     // retrigger play !
     player.playing  = true;
 
@@ -75,7 +76,7 @@ function stopPlayer() {
  */
 function playSequence(sounds, sequence) {
     //console.log("begin play sequence");
-    //console.log(sequence); 
+    //console.log(sequence);
     $(window).trigger('phont_start_player');
     _sequence_index = 0;
     _continueSequence(sounds, sequence);
@@ -88,7 +89,7 @@ function playSequence(sounds, sequence) {
  */
 function _continueSequence(sounds, mySequence) {
     // console.log("playing " + mySequence[_sequence_index] + " at " + _sequence_index);
-    
+
     if (_sequence_index < 0) {
         return;   // signal to stop
     }
@@ -96,19 +97,19 @@ function _continueSequence(sounds, mySequence) {
         $(window).trigger('phont_stop_player');
         return;  // sequence finished
     }
-    
+
     var note_data = mySequence[_sequence_index];
-    
+
     if ( note_data && note_data.charIndex > 0) {
         playSample(sounds, note_data, player);
     }
-    
+
     //// set length from note data or use default length ("phont_tick")
     //var note_length = note_data.length !== undefined && note_data.length>0 ? note_data.length : phont_tick;
-    
+
     //var current_tick = phont_tick;
     var current_tick = note_data.playbacktime * 1000;
-    
+
     _sequence_index++;
     setTimeout(function () {
         _continueSequence(sounds, mySequence);
@@ -120,22 +121,29 @@ function _continueSequence(sounds, mySequence) {
  * @param initObject
  */
 function initPlayer(initObject) {
-    var alet, player, i;
+    var alet, player, sb, i1, i2;
     alet = new Audiolet();
     var sound_map = [];
     var repr_map = [];
-    for (i in initObject.phonemes_list) {
-        var buf = new AudioletBuffer(1,0);
-        buf.load(initObject.phonemes_list[i].sound);
-        sound_map[initObject.phonemes_list[i].id] = buf;
+    for (i1 in initObject) {
+        sb = initObject[i1];
+        repr_map[sb.name] = [];
+        sound_map[sb.name] = [];
+        for (i2 in sb.sounds) {
+            var buf = new AudioletBuffer(1,0);
+            var phon = sb.sounds[i2];
+            buf.load(phon.sound);
+            sound_map[sb.name][phon.id] = buf;
 
-        //sound_map[initObject.phonemes_list[i].id] = new Audio(initObject.phonemes_list[i].sound);
+            //sound_map[initObject.phonemes_list[i].id] = new Audio(initObject.phonemes_list[i].sound);
 
-        repr_map[initObject.phonemes_list[i].id] = initObject.phonemes_list[i].char;
+            repr_map[sb.name][phon.id] = phon.char;
+        }
+
     }
 
     player = new BufferPlayer(alet,
-        sound_map[1],
+        sound_map.female[1],
         0.8,  // sample rate
         0,  // start pos
         0   // loop ?
@@ -202,11 +210,12 @@ function getSequenceFromGui(parent, mapping) {
 function mapDomToNote(el, mapping) {
     el = $(el);
     var myChar = $(".char", el).first().text();
-
-    if ((mapped_id = mapping.indexOf(myChar)) > 0) {
+    var sb = el.data('soundbank');
+    if ((mapped_id = mapping[sb].indexOf(myChar)) > 0) {
         var note_data = {
                 charIndex       : mapped_id,
                 character		: myChar,
+                soundbank       : sb,
                 playbackrate    : parseInt($("#playbackrate", el).val(), 10) / 50,
                 //volume            : parseInt($("#volume", el).val()) / 100,
                 offset          : parseInt($("#offset", el).val(), 10) / 100,
@@ -218,7 +227,7 @@ function mapDomToNote(el, mapping) {
 }
 
 function setSequenceToGui(parent, seq) {
-	
+
 	var template = $('.phonem.template'),
 		phon;
 	for ( var i in seq) {
@@ -228,17 +237,17 @@ function setSequenceToGui(parent, seq) {
 }
 
 function mapNoteToDom(note, template) {
-	
+
 	// clone template
     var phon = $(template).clone();
     phon.removeClass('template');
-    
+
     // set character and filter parameters
     phon.find('.char').html(note.character);
     $("#playbackrate", $(phon)).val(note.playbackrate * 50);
     $("#offset", $(phon)).val(note.offset * 100);
     $("#length", $(phon)).val(note.length * 100);
-    
+
     // knobify + return
     rebind_knob(phon.find('.filter.knob'));
     return phon;
@@ -256,17 +265,17 @@ function mapNoteToDom(note, template) {
 //  this.length=;
 //  this.sample_rate = 1.0;
 //  this.offset=0.0;
-//  
+//
 //  this.setAll = function(mapdata) {
 //      // do mapping from data
 //      // (default mapping)
 //  };
-//  
+//
 //  if (initMap != undefined) {
 //      // possibility to pass in mapper
 //      this.setAll = initMap;
 //  }
-//  
+//
 //  // call mapper on init data
 //  this.setAll(init);
 //}

@@ -1,7 +1,8 @@
 // setup phonemes setting id, character/string and path to soundfile
 // ( or load from external file @see data/setup.json )
-var soundbank = {
-    male: [
+var soundbanks = [
+    {name: 'male',
+     sounds: [
         {id:1,  char:'aɪ̯',   sound:'data/phonemes/1. aɪ̯ (O).wav'},
         {id:2,  char:'aʊ̯',    sound:'data/phonemes/2. aʊ̯ (O).wav'},
         {id:3,  char:'ɔʏ̯',    sound:'data/phonemes/3. ɔʏ̯ (O).wav'},
@@ -49,9 +50,10 @@ var soundbank = {
         {id:45, char:'.',   sound:'data/phonemes/45. Punkt (O).wav'},
         {id:46, char:'?',   sound:'data/phonemes/46. Fragezeichen (O).wav'},
         {id:47, char:'!',   sound:'data/phonemes/47. Rufzeichen (O).wav'},
-        {id:48, char:' ',  sound:'data/silence.wav'},
-    ],
-    female: [
+        {id:48, char:' ',  sound:'data/silence.wav'}
+  ]},
+    {name: 'female',
+     sounds: [
         {id:1,  char:'aɪ̯',   sound:'data/phonemes/1. aɪ̯ (Y).wav'},
         {id:2,  char:'aʊ̯',    sound:'data/phonemes/2. aʊ̯ (Y).wav'},
         {id:3,  char:'ɔʏ̯',    sound:'data/phonemes/3. ɔʏ̯ (Y).wav'},
@@ -100,10 +102,11 @@ var soundbank = {
         {id:46, char:'?',   sound:'data/phonemes/46. Fragezeichen (Y).wav'},
         {id:47, char:'!',   sound:'data/phonemes/47. Rufzeichen (Y).wav'},
         {id:48, char:' ',  sound:'data/silence.wav'},
-    ]};
+    ]},
+];
 
 // get two mappings
-var playerdat   = initPlayer(soundbank.male);
+var playerdat   = initPlayer(soundbanks);
 var sounds      = playerdat[0];
 var characters  = playerdat[1];
 var player      = playerdat[2];
@@ -120,7 +123,7 @@ var alet        = playerdat[3];
 //
 
 
-//// sink test : 
+//// sink test :
 //var k, v, n = 0;
 //var sink = Sink(function(buffer, channelCount){
 //    for (var j=0; j<buffer.length; j+=2, n++) {

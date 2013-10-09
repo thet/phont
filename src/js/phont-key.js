@@ -52,6 +52,7 @@ $(function(){
                 // ♀
                 $template.removeClass('male');
                 $template.addClass('female');
+                $template.attr("data-soundbank", 'female');
                 $('.gendershift').each(function () {
                     $(this).removeClass('male');
                     $(this).addClass('female');
@@ -61,6 +62,7 @@ $(function(){
                 // ♂
                 $template.removeClass('female');
                 $template.addClass('male');
+                $template.attr("data-soundbank", 'male');
                 $('.gendershift').each(function () {
                     $(this).removeClass('female');
                     $(this).addClass('male');
@@ -91,7 +93,6 @@ $(function(){
         phon.removeClass('template');
         phon.find('.char').html(character);
         rebind_knob(phon.find('.filter.knob'));
-
         playSample(sounds, mapDomToNote(phon, characters), player);
 
         $write.append(phon);
