@@ -74,30 +74,7 @@ body {
     background-color: #ffff66;
 }
 
-#keyboard .save,
-#keyboard .delete {
-    font-family: 'Merriweather Sans', sans-serif;
+#keyboard .gendershift {
+    font-size: 2em;
+    font-weight: bolder;
 }
-#keyboard .play {
-    font-family: 'Merriweather Sans', sans-serif;
-}
-#keyboard .return {
-    font-family: 'Merriweather Sans', sans-serif;
-}
-#keyboard .left-shift {
-    background-color:#abbcb4;
-    font-family: 'Merriweather Sans', sans-serif;
-}
-#keyboard .right-shift {
-    background-color:#abbcb4;
-    font-family: 'Merriweather Sans', sans-serif;
-}
-.uppercase {
-    background-color:#abbcb4;
-    font-family: 'Merriweather Sans',
-    sans-serif;
-}
-#keyboard .space {
-    font-family: 'Merriweather Sans', sans-serif;
-}
-
