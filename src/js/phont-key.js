@@ -17,6 +17,11 @@ $(function(){
             //event.preventDefault();
             button.addClass('over');
             button.click();
+            if (button.length>1) {
+                button[0].click();
+            } else {
+                button.click();
+            }
         }
     });
     $(window).keyup(function(event) {
