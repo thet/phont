@@ -1006,12 +1006,13 @@ AudioletNode.prototype.remove = function() {
  * @param {Number} [numberOfChannels=2] The number of output channels.
  * @param {Number} [bufferSize=8192] A fixed buffer size to use.
  */
+var mySink;
 function AudioletDevice(audiolet, sampleRate, numberOfChannels, bufferSize) {
     AudioletNode.call(this, audiolet, 1, 0);
 
     this.sink = Sink(this.tick.bind(this), numberOfChannels, bufferSize,
                      sampleRate);
-
+    mySink = this.sink;
     // Re-read the actual values from the sink.  Sample rate especially is
     // liable to change depending on what the soundcard allows.
     this.sampleRate = this.sink.sampleRate;
@@ -6013,6 +6014,8 @@ SinkClass.prototype = Sink.prototype = {
  * @method Sink
 */
 	start: function (readFn, channelCount, bufferSize, sampleRate) {
+		//console.log("sink created")
+		
 		this.channelCount	= isNaN(channelCount) || channelCount === null ? this.channelCount: channelCount;
 		this.bufferSize		= isNaN(bufferSize) || bufferSize === null ? this.bufferSize : bufferSize;
 		this.sampleRate		= isNaN(sampleRate) || sampleRate === null ? this.sampleRate : sampleRate;
@@ -6021,6 +6024,8 @@ SinkClass.prototype = Sink.prototype = {
 		this.previousHit	= +new Date();
 		Sink.EventEmitter.call(this);
 		Sink.emit('init', [this].concat([].slice.call(arguments)));
+		
+		// console.log(this)
 	},
 /**
  * The method which will handle all the different types of processing applied on a callback.
@@ -7328,6 +7333,8 @@ Sink.prototype.recordData = function (buffer) {
 */
 
 function Recording (bindTo) {
+	console.log("create recording")
+	console.log(bindTo)
 	this.boundTo = bindTo;
 	this.buffers = [];
 	bindTo.activeRecordings.push(this);
@@ -7342,6 +7349,10 @@ Recording.prototype = {
  * @method Recording
 */
 	add: function (buffer) {
+		//console.log("have buffers, ")
+		// console.log(buffer)
+		
+		// do something meaningful with buffer
 		this.buffers.push(buffer);
 	},
 /**
@@ -7360,6 +7371,7 @@ Recording.prototype = {
 	stop: function () {
 		var	recordings = this.boundTo.activeRecordings,
 			i;
+		console.log(recordings);
 		for (i=0; i<recordings.length; i++) {
 			if (recordings[i] === this) {
 				recordings.splice(i--, 1);

@@ -9,9 +9,6 @@ var phont_tick = 400;
 var _sequence_index;
 
 
-
-// var lobject = { charIndex: 0, offset:0, length:1.0 , smprate:1.0 }
-
 /**
  * @param soundbank array an array of samples, indexed
  * @param note_data object containing note data , esp. charIndex
@@ -177,14 +174,109 @@ function getSequenceFromString(strsequ, mapping) {
     return rich_sequence;
 }
 
-var recorder;
+
+//----------------------------------------------------------------------------
+//
+//  recording hacks 
+//
+
+
+//// how to record : 
+//
+//recordStart();
+////  (... play some phonts ....)
+//recordStop();
+//var datauri = exportWav(globalRecBuf);
+//
+//// test the sound
+//var audio = new Audio(datauri);
+//audio.play();
+
+var globalRecBuf = [];
+/**
+ * wrapper for audiosink begin recording
+ * depents on player-node beeing global
+ * uses global globalRecBuf for writing
+ * patches the recordings' add() method, add writes everything into the
+ * global buffer
+ * 
+ * @returns
+ */
 function recordStart() {
-	recorder = player.audiolet.output.device.sink.record();
+	globalRecBuf = [];	// reset global buffer
+	player.audiolet.output.device.sink.altRecord = function() { 
+		var rec = this.record();
+		//rec.simpleBuffer = [];
+		rec.add = function(buffer) { 
+			 //rec.simpleBuffer.push(buffer);
+			 slowAddbuffer(buffer);
+		} 
+		
+		return rec; 
+	}
+	recorder = player.audiolet.output.device.sink.altRecord();
+	return recorder;
 }
+
+/**
+ * wrapper for audiosink record stop
+ * @returns
+ */
 function recordStop() {
-	recorder.stop();
-	return recorder.join();
+	return recorder.stop();
 }
+
+/**
+ * circumvent push(buffer) / Float32Array strange behavior
+ * every element in buffer is simply pushed into one big Array, globalRecBuf
+ * @param buffer
+ */
+function slowAddbuffer(buffer) {
+	var l=buffer.length;
+	for (var i=0; i<l;i++) {
+		globalRecBuf.push(buffer[i]);
+	}
+}
+
+/**
+ * use WavEncoder ( https://github.com/fritzo/wavencoderjs ) 
+ * to encode buffer
+ * 
+ * @param buf float Array
+ * @returns
+ */
+function exportWav(buf) {
+	WavEncoder.defaults.bytesPerSample=2;
+	WavEncoder.defaults.sampleRateHz=44000;
+	WavEncoder.defaults.numChannels=2;
+	var datauri = WavEncoder.encode(buf);
+	return datauri;
+}
+
+/**
+ * record for 1 second , then stop
+ */
+function autorecord() {
+	recordStart();
+	setTimeout(function() {recordStop();}, 1000);
+}
+
+/**
+ * help in debugging buf contents
+ * @param buf
+ */
+function debugBuffer(buf) {
+	var nonzer = 0, l=buf.length;
+	for (var i=0; i<l;i++) {
+		if(buf[i]!=0) {
+			nonzer+=1;
+			//console.log(buf[i]);
+		}
+	}
+	console.log("contains " + nonzer + " nonzero elements ");
+}
+// ----------------------------------------------------------------------------
+
 
 /**
  * transform phoneme list / -sheet into sequence of ids
@@ -253,11 +345,17 @@ function mapNoteToDom(note, template) {
     return phon;
 }
 
-
-// var save_str = JSON.stringify(getSequenceFromGui($("#write"), characters));
-
-// setSequenceToGui($("#write"), JSON.parse(save_str));
-
+//
+// load demo text
+//
+$(document).ready(function() {
+	// save the sequence : 
+	// var save_str = JSON.stringify(getSequenceFromGui($("#write"), characters));
+	
+	// load a sequence
+	var seq = '[{"charIndex":22,"character":"w","playbackrate":1,"offset":0.13,"length":0.72},{"charIndex":14,"character":"e","playbackrate":0.92,"offset":0.2,"length":0.66},{"charIndex":35,"character":"l","playbackrate":1,"offset":0.16,"length":0.52},{"charIndex":11,"character":"ç","playbackrate":1,"offset":0.05,"length":0.36},{"charIndex":27,"character":"ɑ","playbackrate":1,"offset":0,"length":0.68},{"charIndex":21,"character":"m","playbackrate":1,"offset":0,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1},{"charIndex":2,"character":"aʊ̯","playbackrate":1,"offset":0.32,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":37,"character":"f","playbackrate":1,"offset":0.13,"length":0.51},{"charIndex":29,"character":"o","playbackrate":1,"offset":0,"length":0.59},{"charIndex":43,"character":"n","playbackrate":1,"offset":0.14,"length":0.43},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1}]';
+	setSequenceToGui($("#write"), JSON.parse(seq));
+})
 
 
 //function NoteData(init, initMap) {
