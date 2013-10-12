@@ -177,11 +177,11 @@ function getSequenceFromString(strsequ, mapping) {
 
 //----------------------------------------------------------------------------
 //
-//  recording hacks 
+//  recording hacks
 //
 
 
-//// how to record : 
+//// how to record :
 //
 //recordStart();
 ////  (... play some phonts ....)
@@ -199,23 +199,23 @@ var globalRecBuf = [];
  * uses global globalRecBuf for writing
  * patches the recordings' add() method, add writes everything into the
  * global buffer
- * 
+ *
  * @returns
  */
 function recordStart() {
-	globalRecBuf = [];	// reset global buffer
-	player.audiolet.output.device.sink.altRecord = function() { 
-		var rec = this.record();
-		//rec.simpleBuffer = [];
-		rec.add = function(buffer) { 
-			 //rec.simpleBuffer.push(buffer);
-			 slowAddbuffer(buffer);
-		} 
-		
-		return rec; 
-	}
-	recorder = player.audiolet.output.device.sink.altRecord();
-	return recorder;
+    globalRecBuf = [];  // reset global buffer
+    player.audiolet.output.device.sink.altRecord = function() {
+        var rec = this.record();
+        //rec.simpleBuffer = [];
+        rec.add = function(buffer) {
+             //rec.simpleBuffer.push(buffer);
+             slowAddbuffer(buffer);
+        }
+
+        return rec;
+    }
+    recorder = player.audiolet.output.device.sink.altRecord();
+    return recorder;
 }
 
 /**
@@ -223,7 +223,7 @@ function recordStart() {
  * @returns
  */
 function recordStop() {
-	return recorder.stop();
+    return recorder.stop();
 }
 
 /**
@@ -232,33 +232,33 @@ function recordStop() {
  * @param buffer
  */
 function slowAddbuffer(buffer) {
-	var l=buffer.length;
-	for (var i=0; i<l;i++) {
-		globalRecBuf.push(buffer[i]);
-	}
+    var l=buffer.length;
+    for (var i=0; i<l;i++) {
+        globalRecBuf.push(buffer[i]);
+    }
 }
 
 /**
- * use WavEncoder ( https://github.com/fritzo/wavencoderjs ) 
+ * use WavEncoder ( https://github.com/fritzo/wavencoderjs )
  * to encode buffer
- * 
+ *
  * @param buf float Array
  * @returns
  */
 function exportWav(buf) {
-	WavEncoder.defaults.bytesPerSample=2;
-	WavEncoder.defaults.sampleRateHz=44000;
-	WavEncoder.defaults.numChannels=2;
-	var datauri = WavEncoder.encode(buf);
-	return datauri;
+    WavEncoder.defaults.bytesPerSample=2;
+    WavEncoder.defaults.sampleRateHz=44000;
+    WavEncoder.defaults.numChannels=2;
+    var datauri = WavEncoder.encode(buf);
+    return datauri;
 }
 
 /**
  * record for 1 second , then stop
  */
 function autorecord() {
-	recordStart();
-	setTimeout(function() {recordStop();}, 1000);
+    recordStart();
+    setTimeout(function() {recordStop();}, 1000);
 }
 
 /**
@@ -266,14 +266,14 @@ function autorecord() {
  * @param buf
  */
 function debugBuffer(buf) {
-	var nonzer = 0, l=buf.length;
-	for (var i=0; i<l;i++) {
-		if(buf[i]!=0) {
-			nonzer+=1;
-			//console.log(buf[i]);
-		}
-	}
-	console.log("contains " + nonzer + " nonzero elements ");
+    var nonzer = 0, l=buf.length;
+    for (var i=0; i<l;i++) {
+        if(buf[i]!=0) {
+            nonzer+=1;
+            //console.log(buf[i]);
+        }
+    }
+    console.log("contains " + nonzer + " nonzero elements ");
 }
 // ----------------------------------------------------------------------------
 
@@ -306,7 +306,7 @@ function mapDomToNote(el, mapping) {
     if ((mapped_id = mapping[sb].indexOf(myChar)) > 0) {
         var note_data = {
                 charIndex       : mapped_id,
-                character		: myChar,
+                character       : myChar,
                 soundbank       : sb,
                 playbackrate    : parseInt($("#playbackrate", el).val(), 10) / 50,
                 //volume            : parseInt($("#volume", el).val()) / 100,
@@ -320,17 +320,17 @@ function mapDomToNote(el, mapping) {
 
 function setSequenceToGui(parent, seq) {
 
-	var template = $('.phonem.template'),
-		phon;
-	for ( var i in seq) {
-		phon = mapNoteToDom(seq[i], template);
-		$(parent).append(phon);
-	}
+    var template = $('.phonem.template'),
+        phon;
+    for ( var i in seq) {
+        phon = mapNoteToDom(seq[i], template);
+        $(parent).append(phon);
+    }
 }
 
 function mapNoteToDom(note, template) {
 
-	// clone template
+    // clone template
     var phon = $(template).clone();
     phon.removeClass('template');
 
@@ -349,12 +349,12 @@ function mapNoteToDom(note, template) {
 // load demo text
 //
 $(document).ready(function() {
-	// save the sequence : 
-	// var save_str = JSON.stringify(getSequenceFromGui($("#write"), characters));
-	
-	// load a sequence
-	var seq = '[{"charIndex":22,"character":"w","playbackrate":1,"offset":0.13,"length":0.72},{"charIndex":14,"character":"e","playbackrate":0.92,"offset":0.2,"length":0.66},{"charIndex":35,"character":"l","playbackrate":1,"offset":0.16,"length":0.52},{"charIndex":11,"character":"ç","playbackrate":1,"offset":0.05,"length":0.36},{"charIndex":27,"character":"ɑ","playbackrate":1,"offset":0,"length":0.68},{"charIndex":21,"character":"m","playbackrate":1,"offset":0,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1},{"charIndex":2,"character":"aʊ̯","playbackrate":1,"offset":0.32,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":37,"character":"f","playbackrate":1,"offset":0.13,"length":0.51},{"charIndex":29,"character":"o","playbackrate":1,"offset":0,"length":0.59},{"charIndex":43,"character":"n","playbackrate":1,"offset":0.14,"length":0.43},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1}]';
-	setSequenceToGui($("#write"), JSON.parse(seq));
+    // save the sequence :
+    // var save_str = JSON.stringify(getSequenceFromGui($("#write"), characters));
+
+    // load a sequence
+    var seq = '[{"charIndex":22,"character":"w","playbackrate":1,"offset":0.13,"length":0.72},{"charIndex":14,"character":"e","playbackrate":0.92,"offset":0.2,"length":0.66},{"charIndex":35,"character":"l","playbackrate":1,"offset":0.16,"length":0.52},{"charIndex":11,"character":"ç","playbackrate":1,"offset":0.05,"length":0.36},{"charIndex":27,"character":"ɑ","playbackrate":1,"offset":0,"length":0.68},{"charIndex":21,"character":"m","playbackrate":1,"offset":0,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1},{"charIndex":2,"character":"aʊ̯","playbackrate":1,"offset":0.32,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":37,"character":"f","playbackrate":1,"offset":0.13,"length":0.51},{"charIndex":29,"character":"o","playbackrate":1,"offset":0,"length":0.59},{"charIndex":43,"character":"n","playbackrate":1,"offset":0.14,"length":0.43},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1}]';
+    setSequenceToGui($("#write"), JSON.parse(seq));
 })
 
 
