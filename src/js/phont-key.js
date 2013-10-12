@@ -2,21 +2,26 @@ $(function(){
 
     $(window).bind('phont_stop_player', function () {
         $('.play').each(function () {
-            $(this).text('play');
+            var $this = $(this);
+            $this.removeClass('state_stop');
+            $this.addClass('state_play');
+            $this.text('play ▶');
         });
     });
     $(window).bind('phont_start_player', function () {
         $('.play').each(function () {
-            $(this).text('stop');
+            var $this = $(this);
+            $this.removeClass('state_play');
+            $this.addClass('state_stop');
+            $(this).text('stop ■');
         });
     });
 
     $(window).keydown(function(event) {
         var button = $("ul").find("li[data-keycode='" + event.which + "']");
         if (button.length>0) {
-            //event.preventDefault();
+            event.preventDefault();
             button.addClass('over');
-            button.click();
             if (button.length>1) {
                 button[0].click();
             } else {
@@ -27,7 +32,7 @@ $(function(){
     $(window).keyup(function(event) {
         var button = $("ul").find("li[data-keycode='" + event.which + "']");
         if (button.length>0) {
-            //event.preventDefault();
+            event.preventDefault();
             button.removeClass('over');
         }
     });
@@ -44,7 +49,7 @@ $(function(){
 
         // play
         if ($this.hasClass('play')) {
-            if ($this.text() === 'stop') {
+            if ($this.hasClass('state_stop')) {
                 stopPlayer();
             } else {
                 playSequence(sounds, getSequenceFromGui($("#write"), characters));
