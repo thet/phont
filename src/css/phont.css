@@ -32,7 +32,16 @@
     border: 2px solid rgb(204, 204, 204); 
     font-weight: bold;
 }
-#keyboard li:hover { border:2px solid black; }
+#keyboard li.over,
+#keyboard li:hover {
+    position: relative;
+    top: 1px;
+    left: 1px;
+    border-color: black;
+    cursor: pointer;
+    background-color:#e5e5e5;
+}
+
 /*
  make text unselectable
  */
