@@ -29,7 +29,7 @@
 #keyboard li {
     margin-right:3px;
     background: rgb(238, 238, 238);
-    border: 2px solid rgb(204, 204, 204); 
+    border: 2px solid rgb(204, 204, 204);
     font-weight: bold;
 }
 #keyboard li.over,
@@ -83,7 +83,60 @@ body {
     background-color: #ffff66;
 }
 
-#keyboard .gendershift {
-    font-size: 2em;
-    font-weight: bolder;
+
+
+/* control buttons */
+
+#keyboard li.control.firstitem:after,
+#keyboard li.control.lastitem:before {
+    font-size:1.5em;
+}
+
+#keyboard li.control.firstitem { text-align:left; }
+#keyboard li.control.lastitem { text-align:right; }
+#keyboard li.control.firstitem>span { padding: 0 0.5em 0 1em; }
+#keyboard li.control.lastitem>span { padding: 0 1em 0 0.5em; }
+
+#keyboard li.control.delete:before {
+    content: '←';
+}
+#keyboard li.control.save:after {
+    content: '●';
+}
+
+
+/* playing */
+#keyboard li.control.play.state_stop.firstitem:after,
+#keyboard li.control.play.state_stop.lastitem:before {
+    font-size:1em;
+}
+
+#keyboard li.control.play.state_stop.firstitem:after,
+#keyboard li.control.play.state_stop.lastitem:before {
+    content: '▶';
+}
+
+#keyboard li.control.play.state_play.firstitem:after,
+#keyboard li.control.play.state_play.lastitem:before {
+    content: '■';
+}
+
+
+/* gendershift */
+#keyboard li.control.gendershift.firstitem span:after,
+#keyboard li.control.gendershift.lastitem span:before {
+    font-size:2em;
+}
+
+#keyboard li.control.gendershift.firstitem>span { padding: 0 0 0 1em; }
+#keyboard li.control.gendershift.lastitem>span { padding: 0 1em 0 0; }
+
+#keyboard li.control.female.firstitem span:after,
+#keyboard li.control.female.lastitem span:before {
+    content: '♀';
+}
+
+#keyboard li.control.male.firstitem span:after,
+#keyboard li.control.male.lastitem span:before {
+    content: '♂';
 }

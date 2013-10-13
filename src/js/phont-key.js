@@ -3,17 +3,17 @@ $(function(){
     $(window).bind('phont_stop_player', function () {
         $('.play').each(function () {
             var $this = $(this);
-            $this.removeClass('state_stop');
-            $this.addClass('state_play');
-            $this.text('play ▶');
+            $this.removeClass('state_play');
+            $this.addClass('state_stop');
+            $('span', this).text('play');
         });
     });
     $(window).bind('phont_start_player', function () {
         $('.play').each(function () {
             var $this = $(this);
-            $this.removeClass('state_play');
-            $this.addClass('state_stop');
-            $(this).text('stop ■');
+            $this.removeClass('state_stop');
+            $this.addClass('state_play');
+            $('span', this).text('stop');
         });
     });
 
@@ -49,7 +49,7 @@ $(function(){
 
         // play
         if ($this.hasClass('play')) {
-            if ($this.hasClass('state_stop')) {
+            if ($this.hasClass('state_play')) {
                 stopPlayer();
             } else {
                 playSequence(sounds, getSequenceFromGui($("#write"), characters));
@@ -66,7 +66,6 @@ $(function(){
                 $('.gendershift').each(function () {
                     $(this).removeClass('male');
                     $(this).addClass('female');
-                    $(this).text('♀');
                 });
             } else {
                 // ♂
@@ -76,7 +75,6 @@ $(function(){
                 $('.gendershift').each(function () {
                     $(this).removeClass('female');
                     $(this).addClass('male');
-                    $(this).text('♂');
                 });
             }
         }
