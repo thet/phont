@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     'src/js/rec.js',
                     'src/js/phont.js',
                     'src/js/phont-key.js',
-                    'src/js/phont-init.dist.js',
+                    'src/js/phont-init.js',
                     'src/js/knob.js',
                 ],
                 dest: 'src/dist/phont.min.js'
