@@ -56,6 +56,34 @@ $(function(){
             }
         }
 
+        // save
+        if ($this.hasClass('save')) {
+            recordStart();
+            var seq = getSequenceFromGui($("#write"), characters);
+            playSequence(sounds, seq);
+            $(window).bind('phont_stop_player', function() {
+                recordStop();
+                debugger;
+                var form = $this.closest('form');
+                var datauri = exportWav(globalRecBuf);
+                fd = new FormData();
+                fd.append('title', 'My Phonem');
+                fd.append('text', JSON.stringify(seq));
+                fd.append('sound', datauri, 'phonem.wav');
+                $.ajax({
+                    url: form.attr('action'),
+                    data: fd,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+            });
+        }
+
         // gendershift
         if ($this.hasClass('gendershift')) {
             if ($this.hasClass('male')) {
