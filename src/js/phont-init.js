@@ -105,6 +105,11 @@ var soundbanks = [
     ]},
 ];
 
+//$.getJSON("setup.json").done(function(data) {
+//    debugger;
+//    soundbanks = data.soundbanks;
+//});
+
 // get two mappings
 var playerdat   = initPlayer(soundbanks);
 var sounds      = playerdat[0];
