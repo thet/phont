@@ -68,6 +68,7 @@ $(function(){
                 var datauri = exportWav(globalRecBuf);
                 var $title = $('input[name="title"]', $form);
                 fd = new FormData();
+                fd.append('save', '1');
                 fd.append('title', $title.val());
                 fd.append('text', JSON.stringify(seq));
                 fd.append('sound', datauri, 'phonem.wav');
