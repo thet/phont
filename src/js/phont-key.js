@@ -72,16 +72,18 @@ $(function(){
                 fd.append('title', $title.val());
                 fd.append('text', JSON.stringify(seq));
                 fd.append('sound', datauri, 'phonem.wav');
-                $.ajax({
+                var jqxhr = $.ajax({
                     url: action,
                     data: fd,
                     cache: false,
                     contentType: false,
                     processData: false,
                     type: 'POST',
-                    success: function(data){
-                        alert(data);
-                    }
+                }).done(function () {
+                    alert('saved!');
+                //})
+                //.fail(function () {
+                //    alert('saving failed...');
                 });
             });
         }
