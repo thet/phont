@@ -127,10 +127,10 @@ $(function(){
         }
 
         // Special characters
-        if ($this.hasClass('symbol')) character = $('span:visible', $this).html();
-        if ($this.hasClass('space')) character = ' ';
-        if ($this.hasClass('tab')) character = "\t";
-        if ($this.hasClass('return')) character = "\n";
+        if ($this.hasClass('symbol')) { character = $('span:visible', $this).html(); }
+        if ($this.hasClass('space')) { character = ' '; }
+        if ($this.hasClass('tab')) { character = "\t"; }
+        if ($this.hasClass('return')) { character = "\n"; }
 
         // Add the character
         var phon = $template.clone();
