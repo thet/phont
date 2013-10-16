@@ -355,7 +355,7 @@ $(document).ready(function() {
     // load a sequence
     var seq = '[{"charIndex":22,"character":"w","playbackrate":1,"offset":0.13,"length":0.72},{"charIndex":14,"character":"e","playbackrate":0.92,"offset":0.2,"length":0.66},{"charIndex":35,"character":"l","playbackrate":1,"offset":0.16,"length":0.52},{"charIndex":11,"character":"ç","playbackrate":1,"offset":0.05,"length":0.36},{"charIndex":27,"character":"ɑ","playbackrate":1,"offset":0,"length":0.68},{"charIndex":21,"character":"m","playbackrate":1,"offset":0,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1},{"charIndex":2,"character":"aʊ̯","playbackrate":1,"offset":0.32,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":37,"character":"f","playbackrate":1,"offset":0.13,"length":0.51},{"charIndex":29,"character":"o","playbackrate":1,"offset":0,"length":0.59},{"charIndex":43,"character":"n","playbackrate":1,"offset":0.14,"length":0.43},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1}]';
     setSequenceToGui($("#write"), JSON.parse(seq));
-})
+});
 
 
 //function NoteData(init, initMap) {

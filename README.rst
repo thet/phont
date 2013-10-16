@@ -92,3 +92,93 @@ http://net.tutsplus.com/tutorials/javascript-ajax/creating-a-keyboard-with-css-a
 http://d2o0t5hpnwv4c1.cloudfront.net/378_jqueryKeyboard/demo/index.html
 
 
+
+
+Random notes
+============
+
+//
+//var rec =  alet.output.device.sink.record()
+//rec.stop();
+//var buf = rec.join();
+//for (i in buf) console.log(buf[i]); ...
+//
+//
+
+
+//// sink test :
+//var k, v, n = 0;
+//var sink = Sink(function(buffer, channelCount){
+//    for (var j=0; j<buffer.length; j+=2, n++) {
+//            v = Math.sin(k*n);
+//            buffer[j] = v;
+//            buffer[j+1] = v;
+//        }
+//}, 2); // 2 channels ... which is already the default
+//
+//k = 2*Math.PI*440/sink.sampleRate;
+//
+//var recording = sink.record();
+//
+////And when you want to stop recording:
+//
+//recording.stop();
+//
+////To join the recording into a single buffer:
+//
+//var buffer = recording.join();
+// https://github.com/jussi-kalliokoski/sink.js/
+
+
+
+
+
+/*
+aɪ̯
+aʊ̯
+ɔʏ̯
+eəʳ
+ʊəʳ
+ɪəʳ
+ʁ
+ɹ
+r
+ð
+ç
+s
+tʃ
+e
+œ
+ɛ
+i
+ʒ
+z
+dʒ
+m
+w
+p
+k
+ʃ
+h
+ɑ
+ɐ
+o
+y
+g
+d
+j
+ŋ
+l
+t
+f
+ɜʳ
+ʌ
+ʊ
+v
+b
+n
+,
+.
+?
+!
+*/
