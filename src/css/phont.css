@@ -67,24 +67,6 @@ body {
     margin: 0px auto;
 }
 
-.red {
-    background-color:#d40a23;
-}
-.blue {
-    background-color:#4444FF;
-}
-.green {
-    background-color:#99ac19;
-}
-.grey {
-    background-color:#abbcb4;
-}
-.yellow {
-    background-color: #ffff66;
-}
-
-
-
 /* control buttons */
 #keyboard li.control.firstitem { text-align:left; }
 #keyboard li.control.lastitem { text-align:right; }
@@ -110,60 +92,6 @@ body {
 #keyboard li.space:before  { content:'space'; }
 #keyboard li.delete:before { content:'delete'; }
 
-
-/*
-#keyboard li.control.firstitem:after,
-#keyboard li.control.lastitem:before {
-    font-size:1.5em;
-}
-
-#keyboard li.control.delete:before {
-    content: '←';
-}
-#keyboard li.control.save:after {
-    content: '●';
-}
-*/
-
-/* playing */
-/*
-#keyboard li.control.play.state_stop.firstitem:after,
-#keyboard li.control.play.state_stop.lastitem:before {
-    font-size:1em;
-}
-
-#keyboard li.control.play.state_stop.firstitem:after,
-#keyboard li.control.play.state_stop.lastitem:before {
-    content: '▶';
-}
-
-#keyboard li.control.play.state_play.firstitem:after,
-#keyboard li.control.play.state_play.lastitem:before {
-    content: '■';
-}
-*/
-
-/* gendershift */
-/*
-#keyboard li.control.gendershift.firstitem span:after,
-#keyboard li.control.gendershift.lastitem span:before {
-    font-size:2em;
-}
-
-#keyboard li.control.gendershift.firstitem>span { padding: 0 0 0 1em; }
-#keyboard li.control.gendershift.lastitem>span { padding: 0 1em 0 0; }
-
-#keyboard li.control.female.firstitem span:after,
-#keyboard li.control.female.lastitem span:before {
-    content: '♀';
-}
-
-#keyboard li.control.male.firstitem span:after,
-#keyboard li.control.male.lastitem span:before {
-    content: '♂';
-}
-*/
-
 #phont_form input[name="title"] {
     font-size: 2em;
     font-weight: bold;
@@ -172,8 +100,3 @@ body {
 #phont_form input[name="title"]::-webkit-input-placeholder { color:#AAA; }
 #phont_form input[name="title"]::-moz-placeholder { color:#AAA; }
 #phont_form input[name="title"]:-ms-input-placeholder { color:#AAA; }
-/*
-#phont_form input[name="title"]::-webkit-input-placeholder { font-size: 2em; font-weight: bold; }
-#phont_form input[name="title"]::-moz-placeholder { font-size: 2em; font-weight: bold; }
-#phont_form input[name="title"]:-ms-input-placeholder { font-size: 2em; font-weight: bold; }
-*/
