@@ -5,7 +5,6 @@ $(function(){
             var $this = $(this);
             $this.removeClass('state_play');
             $this.addClass('state_stop');
-            $('span', this).text('play');
         });
     });
     $(window).on('phont_start_player', function () {
@@ -13,7 +12,6 @@ $(function(){
             var $this = $(this);
             $this.removeClass('state_stop');
             $this.addClass('state_play');
-            $('span', this).text('stop');
         });
     });
 

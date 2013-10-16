@@ -12,6 +12,9 @@
 
 <div id="container">
 
+<form action="phont_add" method="post" enctype="multipart/form-data" id="phont_form">
+  <input name="title" value="" type="text" placeholder="title"/>
+
   <div class="phonem template" data-id="" data-soundbank="female">
     <div class="char"></div>
     <div class="filterwrapper">
@@ -39,10 +42,10 @@
     <li data-id="" data-keycode="48" class="letter">ç</li>
     <li data-id="" data-keycode="173" class="letter">s</li>
     <li data-id="" data-keycode="61" class="letter">tʃ</li>
-    <li data-id="" data-keycode="8" class="delete control red lastitem"
-        title="löscht das phone vor dem cusor / deletes the phone before the cursor"><span>delete</span></li>
-    <li data-id="" data-keycode="9" class="save control blue firstitem"
-        title="sichert das ergebnis unter ihrem namen / saves the results as your contribution"><span>save</span></li><!-- tab -->
+    <li data-id="" data-keycode="8" class="delete control lastitem"
+        title="löscht das phone vor dem cusor / deletes the phone before the cursor"></li>
+    <li data-id="" data-keycode="9" class="save control firstitem"
+        title="sichert das ergebnis unter ihrem namen / saves the results as your contribution"></li><!-- tab -->
     <li data-id="" data-keycode="81" class="letter">e</li>
     <li data-id="" data-keycode="87" class="letter">œ</li>
     <li data-id="" data-keycode="69" class="letter">ɛ</li>
@@ -56,8 +59,8 @@
     <li data-id="" data-keycode="219" class="letter">k</li>
     <li data-id="" data-keycode="221" class="letter">ʃ</li>
     <li data-id="" data-keycode="220" class="letter lastitem">h</li>
-    <li data-id="" data-keycode="225" class="play control green firstitem state_stop"
-        title="spielt oder stoppt ihre komposition / plays or stops your composition"><span>play</span></li><!-- capslock -->
+    <li data-id="" data-keycode="225" class="play control firstitem state_stop"
+        title="spielt oder stoppt ihre komposition / plays or stops your composition"></li><!-- capslock -->
     <li data-id="" data-keycode="65" class="letter">ɑ</li>
     <li data-id="" data-keycode="83" class="letter">ɐ</li>
     <li data-id="" data-keycode="68" class="letter">o</li>
@@ -69,22 +72,25 @@
     <li data-id="" data-keycode="76" class="letter">l</li>
     <li data-id="" data-keycode="59" class="letter">t</li>
     <li data-id="" data-keycode="222" class="letter">f</li>
-    <li data-id="" data-keycode="13" class="play control green lastitem state_stop"><span>play</span></li><!-- return -->
-    <li data-id="" data-keycode="16" class="gendershift female control left grey firstitem" title=""><span></span></li>
+    <li data-id="" data-keycode="13" class="play control lastitem state_stop"></li><!-- return -->
+    <li data-id="" data-keycode="16" class="gendershift female control left firstitem" title=""></li>
     <li data-id="" data-keycode="90" class="letter">ɜʳ</li>
     <li data-id="" data-keycode="88" class="letter">ʌ</li>
     <li data-id="" data-keycode="67" class="letter">ʊ</li>
     <li data-id="" data-keycode="86" class="letter">v</li>
     <li data-id="" data-keycode="66" class="letter">b</li>
     <li data-id="" data-keycode="78" class="letter">n</li>
-    <li data-id="" data-keycode="77" class="symbol"><span class="off">,</span><span class="on">,</span></li>
-    <li data-id="" data-keycode="188" class="symbol"><span class="off">.</span><span class="on">.</span></li>
-    <li data-id="" data-keycode="190" class="symbol"><span class="off">?</span><span class="on">?</span></li>
-    <li data-id="" data-keycode="191" class="symbol"><span class="off">!</span><span class="on">!</span></li>
-    <li data-id="" data-keycode="16" class="gendershift female control right grey lastitem"><span></span></li>
-    <li data-id="" data-keycode="32" class="space yellow firstitem lastitem"
-        title="setzt eine pause - um die pause zu verlängern, mehrmals tippen / sets a pause - to extend the pause type many times">&nbsp;</li>
+    <li data-id="" data-keycode="77" class="letter symbol">,</li>
+    <li data-id="" data-keycode="188" class="letter symbol">.</li>
+    <li data-id="" data-keycode="190" class="letter symbol">?</li>
+    <li data-id="" data-keycode="191" class="letter symbol">!</li>
+    <li data-id="" data-keycode="16" class="gendershift female control right lastitem"></li>
+    <li data-id="" data-keycode="32" class="space control firstitem"
+        title="setzt eine pause - um die pause zu verlängern, mehrmals tippen / sets a pause - to extend the pause type many times"></li>
   </ul>
+
+</form>
+
 </div>
 
 <script type="text/javascript" src="lib/jquery-1.8.3.min.js"></script>

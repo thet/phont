@@ -67,35 +67,55 @@ body {
     margin: 0px auto;
 }
 
-#keyboard li.red {
+.red {
     background-color:#d40a23;
 }
-#keyboard li.blue {
+.blue {
     background-color:#4444FF;
 }
-#keyboard li.green {
+.green {
     background-color:#99ac19;
 }
-#keyboard li.grey {
+.grey {
     background-color:#abbcb4;
 }
-#keyboard li.yellow {
+.yellow {
     background-color: #ffff66;
 }
 
 
 
 /* control buttons */
-
-#keyboard li.control.firstitem:after,
-#keyboard li.control.lastitem:before {
-    font-size:1.5em;
-}
-
 #keyboard li.control.firstitem { text-align:left; }
 #keyboard li.control.lastitem { text-align:right; }
 #keyboard li.control.firstitem>span { padding: 0 0.5em 0 1em; }
 #keyboard li.control.lastitem>span { padding: 0 1em 0 0.5em; }
+
+#keyboard li.control     { font-family: 'Verdana', sans-serif; font-size: 12px; color:white; }
+#keyboard li.save        { background-color: #6e9db1; }
+#keyboard li.play        { background-color: #b8a34a; }
+#keyboard li.gendershift { background-color: #8aa893; }
+#keyboard li.space       { background-color: #eda53e; }
+#keyboard li.delete      { background-color: #d45849; }
+#keyboard li.symbol      { background-color: #e4d8b8; }
+
+
+#keyboard li.control:before { padding:0 0.5em; }
+
+#keyboard li.save:before   { content:'save'; } 
+#keyboard li.state_stop:before   { content:'play'; }
+#keyboard li.state_play:before   { content:'stop'; }
+#keyboard li.female:before { content:'female'; }
+#keyboard li.male:before   { content:'male'; }
+#keyboard li.space:before  { content:'space'; }
+#keyboard li.delete:before { content:'delete'; }
+
+
+/*
+#keyboard li.control.firstitem:after,
+#keyboard li.control.lastitem:before {
+    font-size:1.5em;
+}
 
 #keyboard li.control.delete:before {
     content: '←';
@@ -103,9 +123,10 @@ body {
 #keyboard li.control.save:after {
     content: '●';
 }
-
+*/
 
 /* playing */
+/*
 #keyboard li.control.play.state_stop.firstitem:after,
 #keyboard li.control.play.state_stop.lastitem:before {
     font-size:1em;
@@ -120,9 +141,10 @@ body {
 #keyboard li.control.play.state_play.lastitem:before {
     content: '■';
 }
-
+*/
 
 /* gendershift */
+/*
 #keyboard li.control.gendershift.firstitem span:after,
 #keyboard li.control.gendershift.lastitem span:before {
     font-size:2em;
@@ -140,6 +162,7 @@ body {
 #keyboard li.control.male.lastitem span:before {
     content: '♂';
 }
+*/
 
 #phont_form input[name="title"] {
     font-size: 2em;
