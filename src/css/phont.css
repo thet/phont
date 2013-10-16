@@ -140,3 +140,17 @@ body {
 #keyboard li.control.male.lastitem span:before {
     content: '♂';
 }
+
+#phont_form input[name="title"] {
+    font-size: 2em;
+    font-weight: bold;
+    width: 671px;
+}
+#phont_form input[name="title"]::-webkit-input-placeholder { color:#AAA; }
+#phont_form input[name="title"]::-moz-placeholder { color:#AAA; }
+#phont_form input[name="title"]:-ms-input-placeholder { color:#AAA; }
+/*
+#phont_form input[name="title"]::-webkit-input-placeholder { font-size: 2em; font-weight: bold; }
+#phont_form input[name="title"]::-moz-placeholder { font-size: 2em; font-weight: bold; }
+#phont_form input[name="title"]:-ms-input-placeholder { font-size: 2em; font-weight: bold; }
+*/
