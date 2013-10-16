@@ -18,6 +18,7 @@ $(function(){
     });
 
     $(window).keydown(function(event) {
+        if ($('input:focus').length>0) { return; }
         var button = $("ul").find("li[data-keycode='" + event.which + "']");
         if (button.length>0) {
             event.preventDefault();
@@ -30,6 +31,7 @@ $(function(){
         }
     });
     $(window).keyup(function(event) {
+        if ($('input:focus').length>0) { return; }
         var button = $("ul").find("li[data-keycode='" + event.which + "']");
         if (button.length>0) {
             event.preventDefault();
