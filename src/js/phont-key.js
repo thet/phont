@@ -73,7 +73,7 @@ $(function(){
                 fd.append('save', '1');
                 fd.append('title', $title.val());
                 fd.append('text', JSON.stringify(seq));
-                fd.append('sound', datauri, 'phonem.wav');
+                fd.append('sound', datauri);
                 $form.submit(fd);
                 var jqxhr = $.ajax({
                     url: action,
