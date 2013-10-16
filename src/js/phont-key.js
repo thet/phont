@@ -58,10 +58,12 @@ $(function(){
 
         // save
         if ($this.hasClass('save')) {
-            recordStart();
             var seq = getSequenceFromGui($("#write"), characters);
+            console.log('start recording');
+            recordStart();
             playSequence(sounds, seq);
-            $(window).bind('phont_stop_player', function() {
+            $(window).one('phont_stop_player', function() {
+                console.log('stop recording');
                 recordStop();
                 var $form = $this.closest('form');
                 var action = $form.attr('action');
