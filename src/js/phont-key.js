@@ -1,6 +1,6 @@
 $(function(){
 
-    $(window).bind('phont_stop_player', function () {
+    $(window).on('phont_stop_player', function () {
         $('.play').each(function () {
             var $this = $(this);
             $this.removeClass('state_play');
@@ -8,7 +8,7 @@ $(function(){
             $('span', this).text('play');
         });
     });
-    $(window).bind('phont_start_player', function () {
+    $(window).on('phont_start_player', function () {
         $('.play').each(function () {
             var $this = $(this);
             $this.removeClass('state_stop');
