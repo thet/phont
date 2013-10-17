@@ -53,8 +53,8 @@ var Base64Binary = {
 		var lkey2 = this._keyStr.indexOf(input.charAt(input.length-2));		 
 	
 		var bytes = (input.length/4) * 3;
-		if (lkey1 == 64) bytes--; //padding chars, so skip
-		if (lkey2 == 64) bytes--; //padding chars, so skip
+		if (lkey1 === 64) { bytes--; } //padding chars, so skip
+		if (lkey2 === 64) { bytes--; } //padding chars, so skip
 		
 		var uarray;
 		var chr1, chr2, chr3;
@@ -62,10 +62,11 @@ var Base64Binary = {
 		var i = 0;
 		var j = 0;
 		
-		if (arrayBuffer)
+		if (arrayBuffer) {
 			uarray = new Uint8Array(arrayBuffer);
-		else
+        } else {
 			uarray = new Uint8Array(bytes);
+        }
 		
 		input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 		
@@ -81,11 +82,10 @@ var Base64Binary = {
 			chr3 = ((enc3 & 3) << 6) | enc4;
 	
 			uarray[i] = chr1;			
-			if (enc3 != 64) uarray[i+1] = chr2;
-			if (enc4 != 64) uarray[i+2] = chr3;
+			if (enc3 !== 64) { uarray[i+1] = chr2; }
+			if (enc4 !== 64) { uarray[i+2] = chr3; }
 		}
 	
 		return uarray;	
 	}
-}
-
+};
