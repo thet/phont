@@ -100,3 +100,12 @@ body {
 #phont_form input[name="title"]::-webkit-input-placeholder { color:#AAA; }
 #phont_form input[name="title"]::-moz-placeholder { color:#AAA; }
 #phont_form input[name="title"]:-ms-input-placeholder { color:#AAA; }
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+
+  width: 250px;
+  height: 20px;
+}

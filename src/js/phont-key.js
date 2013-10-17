@@ -83,7 +83,20 @@ $(function(){
                         contentType: false,
                         processData: false,
                         type: 'POST',
-                    }).done(function () {
+                        xhr: function() {
+                            var xhr = new window.XMLHttpRequest();
+                            //Upload progress
+                            xhr.upload.addEventListener("progress", function(evt){
+                                if (evt.lengthComputable) {
+                                    var complete = evt.loaded / evt.total;
+                                    $('#progress').val(complete);
+                                    //Do something with upload progress
+                                    console.log(complete);
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                     }).done(function () {
                         console.log('saved!');
                     })
                     .fail(function () {
