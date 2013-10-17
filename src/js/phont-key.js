@@ -89,7 +89,7 @@ $(function(){
                             xhr.upload.addEventListener("progress", function(evt){
                                 if (evt.lengthComputable) {
                                     $('.progressbar').show();
-                                    var complete = evt.loaded / evt.total;
+                                    var complete = (evt.loaded / evt.total) * 100;
                                     $('#progress').val(complete);
                                     //Do something with upload progress
                                     console.log(complete);
