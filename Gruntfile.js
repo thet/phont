@@ -20,9 +20,7 @@ module.exports = function(grunt) {
                 src: [
                     'src/lib/Audiolet/src/audiolet/Audiolet.js',
                     'src/lib/jQuery-Knob/js/jquery.knob.js',
-                    'src/lib/Recorderjs/recorder.js',
                     'src/lib/wavencoderjs/wavencoder.js',
-                    'src/js/rec.js',
                     'src/js/phont.js',
                     'src/js/phont-key.js',
                     'src/js/phont-init.dist.js',
