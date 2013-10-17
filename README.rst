@@ -42,6 +42,8 @@ http://directory.fsf.org/wiki/License:ArtisticLicense2.0
 
 libs
 ====
+http://en.wikipedia.org/wiki/HTML5_Audio
+
 
 musical score lib
 http://0xfe.blogspot.co.at/2010/05/music-notation-with-html5-canvas.html
@@ -50,9 +52,14 @@ synth lib
 https://github.com/oampo/Audiolet
 http://oampo.github.io/Audiolet/api.html
 
+https://github.com/jussi-kalliokoski/audiolib.js
 http://audiolibjs.org/
 
+https://github.com/jussi-kalliokoski/sink.js
+https://github.com/fritzo/wavencoderjs
 https://github.com/mattdiamond/Recorderjs
+https://github.com/jwagener/recorder.js/
+https://github.com/ofmlabs/aurora.js/
 
 ui
 http://kievii.net/examples.html
@@ -92,7 +99,9 @@ http://net.tutsplus.com/tutorials/javascript-ajax/creating-a-keyboard-with-css-a
 http://d2o0t5hpnwv4c1.cloudfront.net/378_jqueryKeyboard/demo/index.html
 
 
-
+Progress bar w/ jQuery:
+http://www.dave-bond.com/blog/2010/01/JQuery-ajax-progress-HMTL5/ 
+http://css-tricks.com/html5-progress-element/
 
 Random notes
 ============
