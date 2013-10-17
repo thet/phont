@@ -101,6 +101,7 @@ body {
 #phont_form input[name="title"]::-moz-placeholder { color:#AAA; }
 #phont_form input[name="title"]:-ms-input-placeholder { color:#AAA; }
 
+.progressbar { display: none; }
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;

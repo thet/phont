@@ -88,6 +88,7 @@ $(function(){
                             //Upload progress
                             xhr.upload.addEventListener("progress", function(evt){
                                 if (evt.lengthComputable) {
+                                    $('.progressbar').show();
                                     var complete = evt.loaded / evt.total;
                                     $('#progress').val(complete);
                                     //Do something with upload progress
@@ -96,14 +97,16 @@ $(function(){
                             }, false);
                             return xhr;
                         },
-                     }).done(function () {
-                        console.log('saved!');
-                    })
+                     })
                     .fail(function () {
                         console.log('saving failed...');
                     })
                     .done(function (data) {
+                        console.log('saved!');
                         if (data) { window.location.href = data; }
+                    })
+                    .always(function () {
+                        $('.progressbar').hide();
                     });
                 });
             }
