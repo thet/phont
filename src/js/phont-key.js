@@ -91,8 +91,7 @@ $(function(){
                                     $('.progressbar').show();
                                     var complete = (evt.loaded / evt.total) * 100;
                                     $('#progress').val(complete);
-                                    //Do something with upload progress
-                                    console.log(complete);
+                                    //console.log(complete);
                                 }
                             }, false);
                             return xhr;
