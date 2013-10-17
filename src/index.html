@@ -13,6 +13,9 @@
 <div id="container">
 
 <form action="phont_add" method="post" enctype="multipart/form-data" id="phont_form">
+
+  <div class="progressbar">Upload progress: <progress id="progress" value="0" max="100"></progress></div>
+
   <input name="title" value="" type="text" placeholder="title"/>
 
   <div class="phonem template" data-id="" data-soundbank="female">
@@ -25,8 +28,6 @@
       </div>
     </div>
   </div>
-  
-  <div class="progressbar">Upload progress: <progress id="progress" value="0" max="100"></progress></div>
 
   <div id="write" class="textarea"></div>
 
