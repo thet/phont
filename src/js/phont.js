@@ -5,8 +5,60 @@
 /** timeout ticker */
 var phont_tick = 400;
 
+/** pause between notes */
+var pause_after_note = 0;
+
 /** indicates play position */
 var _sequence_index;
+
+// ----------------------------------------------------------
+/** 
+ * "precision" interval , setTimeout replacement 
+ */
+var tickinterval;	// handle for timer-interval
+var things_to_do = [];	// list of (timestamp, action) tupels
+/**
+ * turn ticker interval on / off
+ * @param onoff
+ */
+function tickStatus(onoff, resolution) {
+	if(tickinterval != undefined) {
+		window.clearInterval(tickinterval);	
+	}
+	if (resolution == undefined) resolution = 5;
+	if(onoff) {
+		tickinterval = window.setInterval(precisionTick, resolution);
+	} 
+}
+/**
+ * schedule an action
+ * @param what
+ * @param when
+ */
+function precision_timeout(what, when) {
+	var ntime = window.performance.now();
+	var do_when = ntime + when;
+	// console.log("at " + ntime + ", set to ", do_when);
+	things_to_do.push([do_when, what]);
+}
+/**
+ * the ticker function
+ */
+function precisionTick() {
+	var curt = window.performance.now();
+	for ( i in things_to_do) {
+		var item = things_to_do[i];
+		if (curt > item[0]) {
+			things_to_do.splice(i,1);
+			item[1]();
+		}
+	}
+}
+
+//turn on tick
+tickStatus(true);
+
+//----------------------------------------------------------
 
 
 /**
@@ -14,10 +66,19 @@ var _sequence_index;
  * @param note_data object containing note data , esp. charIndex
  * @param player BufferPlayer the player object
  */
+var _voice_index = 0;
+var number_of_voices = 2;	// for each voice, a player must be defined 
+							// in the "players" list (see initPlayer() )
 function playSample(soundbank, note_data, player) {
-
+	
+//	// use the player passed in 
+//	var _internal_player = player;
+	
+	// use player from global players array (polyphonic)
+	var _internal_player = players[_voice_index];
+	
     // stop player
-    player.playing  = false;
+    _internal_player.playing  = false;
 
     var sb = note_data.soundbank;
     // check if soundbuffer ok
@@ -27,27 +88,27 @@ function playSample(soundbank, note_data, player) {
     }
 
     // set buffer + rewind
-    player.buffer   = soundbank[sb][note_data.charIndex];
-    player.position = 0;
-    player.playbackRate.setValue(1.0);
+    _internal_player.buffer   = soundbank[sb][note_data.charIndex];
+    _internal_player.position = 0;
+    _internal_player.playbackRate.setValue(1.0);
 
     //
     // possible additional params :
     //
-    //      player.position = some_offset;  // absolute offset
-    //      player.position = player.buffer.length * 0.5;   // offset relative to sample length
-    //      player.playbackRate.setValue(0.8);  // playback rate (~ pitch)
+    //      _internal_player.position = some_offset;  // absolute offset
+    //      _internal_player.position = _internal_player.buffer.length * 0.5;   // offset relative to sample length
+    //      _internal_player.playbackRate.setValue(0.8);  // playback rate (~ pitch)
     //
 
     if ( ! isNaN(note_data.playbackrate) ) {
-        player.playbackRate.setValue(note_data.playbackrate);
+        _internal_player.playbackRate.setValue(note_data.playbackrate);
     }
     if ( ! isNaN(note_data.offset) ) {
-        player.position = player.buffer.length * note_data.offset;
+        _internal_player.position = _internal_player.buffer.length * note_data.offset;
     }
-
-    var playbacktime = ((1/player.playbackRate.getValue()) *
-        (player.buffer.length - player.position))
+    
+    var playbacktime = ((1/_internal_player.playbackRate.getValue()) *
+        (_internal_player.buffer.length - _internal_player.position))
         / alet.output.device.sampleRate;
 
     if ( ! isNaN(note_data.length)) {
@@ -56,10 +117,12 @@ function playSample(soundbank, note_data, player) {
     note_data.playbacktime = playbacktime;
 
     // retrigger play !
-    player.playing  = true;
-
+    _internal_player.playing  = true;
+    
+    // set voice index
+    _voice_index = (_voice_index + 1) % number_of_voices;
+    
 }
-
 
 function stopPlayer() {
     _sequence_index = -1;
@@ -72,7 +135,7 @@ function stopPlayer() {
  * @param sequence
  */
 function playSequence(sounds, sequence) {
-    //console.log("begin play sequence");
+    console.log("begin play sequence");
     //console.log(sequence);
     $(window).trigger('phont_start_player');
     _sequence_index = 0;
@@ -103,20 +166,24 @@ function _continueSequence(sounds, mySequence) {
 
     //// set length from note data or use default length ("phont_tick")
     //var note_length = note_data.length !== undefined && note_data.length>0 ? note_data.length : phont_tick;
-
     //var current_tick = phont_tick;
-    var current_tick = note_data.playbacktime * 1000;
-
+    var current_tick = note_data.playbacktime * 1000 + pause_after_note;
     _sequence_index++;
-    setTimeout(function () {
+    
+    precision_timeout(function() {
         _continueSequence(sounds, mySequence);
     }, current_tick);
+    
+//    setTimeout(function () {
+//        _continueSequence(sounds, mySequence);
+//    }, current_tick);
 }
 
 /**
  * generate mappings for id-to-sound and id-to-unicodeString
  * @param initObject
  */
+var players;
 function initPlayer(initObject) {
     var alet, player, sb, i1, i2;
     alet = new Audiolet();
@@ -139,15 +206,16 @@ function initPlayer(initObject) {
 
     }
 
-    player = new BufferPlayer(alet,
-        sound_map.female[1],
-        0.8,  // sample rate
-        0,  // start pos
-        0   // loop ?
-    );
-
+    player = new BufferPlayer(alet, sound_map.female[1],1.0, 0, 0);
     player.playing = false;
     player.connect(alet.output);
+    
+    // set up more players (polyphony)
+    player2 = new BufferPlayer(alet, sound_map.female[1], 1.0, 0, 0);
+    player2.playing = false;
+    player2.connect(alet.output);
+    players = [player, player2];
+    
     return [sound_map, repr_map, player, alet];
 }
 
@@ -206,15 +274,21 @@ function recordStart() {
     globalRecBuf = [];  // reset global buffer
     player.audiolet.output.device.sink.altRecord = function() {
         var rec = this.record();
-        //rec.simpleBuffer = [];
         rec.add = function(buffer) {
-             //rec.simpleBuffer.push(buffer);
-             slowAddbuffer(buffer);
+       		debugBuffer(buffer);
+       		console.log("number of buffers " + this.buffers.length);
+       		for ( var i in this.buffers) {
+       			console.log("\told buffer examination ... ")
+       			debugBuffer(this.buffers[i]);
+       		}
+       		slowAddbuffer(buffer);
+       		this.buffers.push(buffer);
         }
 
         return rec;
     }
     recorder = player.audiolet.output.device.sink.altRecord();
+    // recorder = player.audiolet.output.device.sink.record();
     return recorder;
 }
 
@@ -222,7 +296,9 @@ function recordStart() {
  * wrapper for audiosink record stop
  * @returns
  */
+var finalRec;
 function recordStop() {
+	finalRec = recorder.join();
     return recorder.stop();
 }
 
@@ -353,7 +429,8 @@ $(document).ready(function() {
     // var save_str = JSON.stringify(getSequenceFromGui($("#write"), characters));
 
     // load a sequence
-    var seq = '[{"charIndex":22,"character":"w","playbackrate":1,"offset":0.13,"length":0.72},{"charIndex":14,"character":"e","playbackrate":0.92,"offset":0.2,"length":0.66},{"charIndex":35,"character":"l","playbackrate":1,"offset":0.16,"length":0.52},{"charIndex":11,"character":"ç","playbackrate":1,"offset":0.05,"length":0.36},{"charIndex":27,"character":"ɑ","playbackrate":1,"offset":0,"length":0.68},{"charIndex":21,"character":"m","playbackrate":1,"offset":0,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1},{"charIndex":2,"character":"aʊ̯","playbackrate":1,"offset":0.32,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":37,"character":"f","playbackrate":1,"offset":0.13,"length":0.51},{"charIndex":29,"character":"o","playbackrate":1,"offset":0,"length":0.59},{"charIndex":43,"character":"n","playbackrate":1,"offset":0.14,"length":0.43},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1}]';
+    // var seq = '[{"charIndex":22,"character":"w","playbackrate":1,"offset":0.13,"length":0.72},{"charIndex":14,"character":"e","playbackrate":0.92,"offset":0.2,"length":0.66},{"charIndex":35,"character":"l","playbackrate":1,"offset":0.16,"length":0.52},{"charIndex":11,"character":"ç","playbackrate":1,"offset":0.05,"length":0.36},{"charIndex":27,"character":"ɑ","playbackrate":1,"offset":0,"length":0.68},{"charIndex":21,"character":"m","playbackrate":1,"offset":0,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1},{"charIndex":2,"character":"aʊ̯","playbackrate":1,"offset":0.32,"length":1},{"charIndex":48,"character":" ","playbackrate":1,"offset":0,"length":1},{"charIndex":37,"character":"f","playbackrate":1,"offset":0.13,"length":0.51},{"charIndex":29,"character":"o","playbackrate":1,"offset":0,"length":0.59},{"charIndex":43,"character":"n","playbackrate":1,"offset":0.14,"length":0.43},{"charIndex":36,"character":"t","playbackrate":1,"offset":0,"length":1}]';
+    var seq = '[{"charIndex":22,"character":"w","playbackrate":1,"offset":0.13,"length":0.72}]';
     setSequenceToGui($("#write"), JSON.parse(seq));
 });
 
