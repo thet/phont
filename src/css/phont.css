@@ -1,37 +1,45 @@
-
-.phonem { display: inline-block;
-          text-align: center;
-          margin: 0;
-          padding: 0;
-        }
-.phonem:hover { background: rgb(255, 255, 102); color:black; z-index:1000; }
-.phonem > div { margin: auto; margin-bottom: 5px; }
-.phonem .char {
-    min-width: 0.5em;
-    font-size: 5em; line-height: 1em; text-align: center;
-    font-family: 'Merriweather Sans', sans-serif;
+body {
+    text-rendering: optimizelegibility;
+    font: 71%/1.5 'Merriweather Sans', sans-serif;
 }
-.phonem .filterwrapper { position: relative; }
-.phonem .filter { display: none; position: absolute; background: rgb(255, 255, 102); }
-.phonem:hover .filter { display: block; z-index:1000; }
-.phonem.template { display: none; }
-.phonem .filter>div { margin:0 3px 3px 3px; }
 
 #write {
+    margin: 0 0 5px;
+    padding: 5px;
+    
     width: 671px;
     min-height: 200px;
     height: auto;
     background: black;
     color: white;
     border: 2px solid rgb(204, 204, 204);
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#keyboard {
+    width: 688px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 #keyboard li {
-    margin-right:3px;
+    float: left;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    margin: 0 3px 5px 0;
     background: rgb(238, 238, 238);
     border: 2px solid rgb(204, 204, 204);
-    font-weight: bold;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
+
 #keyboard li.over,
 #keyboard li:hover {
     position: relative;
@@ -42,9 +50,7 @@
     background-color:#e5e5e5;
 }
 
-/*
- make text unselectable
- */
+/* make text unselectable */
 *.unselectable,
 #keyboard li  {
    -moz-user-select: -moz-none;
@@ -55,17 +61,46 @@
    user-select: none;
 }
 
+/* KEYBOARD LAYOUT */
+.firstitem {
+    clear: left;
+}
+#keyboard .save,
+#keyboard .tab,
+#keyboard .delete {
+    width: 70px;
+}
+#keyboard .play,
+#keyboard .capslock {
+    width: 80px;
+}
+#keyboard .play.lastitem, 
+#keyboard .return {
+    width: 77px;
+}
+
+#keyboard .left.gendershift {
+    width: 95px;
+}
+#keyboard .right.gendershift {
+    width: 109px;
+}
+.lastitem {
+    margin-right: 0;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+#keyboard .space {
+    clear: left;
+    width: 681px;
+}
+.on {
+    display: none;
+}
+
 
 /* keyboard customizations */
-body {
-    background: white;
-    margin: 20px auto;
-    text-rendering: optimizelegibility;
-    font-family: 'Merriweather Sans', sans-serif;
-}
-#container {
-    margin: 0px auto;
-}
 
 /* control buttons */
 #keyboard li.control.firstitem { text-align:left; }
@@ -92,6 +127,8 @@ body {
 #keyboard li.space:before  { content:'space'; }
 #keyboard li.delete:before { content:'delete'; }
 
+
+/* FORM */
 #phont_form input[name="title"] {
     font-size: 2em;
     font-weight: bold;
@@ -105,8 +142,27 @@ body {
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;
+  -moz-appearance: none;
    appearance: none;
-
   width: 250px;
   height: 20px;
 }
+
+/* PHONEM AND FILTERS */
+.phonem { display: inline-block;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+        }
+.phonem:hover { background: rgb(255, 255, 102); color:black; z-index:1000; }
+.phonem > div { margin: auto; margin-bottom: 5px; }
+.phonem .char {
+    min-width: 0.5em;
+    font-size: 5em; line-height: 1em; text-align: center;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.phonem .filterwrapper { position: relative; }
+.phonem .filter { display: none; position: absolute; background: rgb(255, 255, 102); }
+.phonem:hover .filter { display: block; z-index:1000; }
+.phonem.template { display: none; }
+.phonem .filter>div { margin:0 3px 3px 3px; }

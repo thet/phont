@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/* keyboard customizations */
+body {
+    background: white;
+    margin: 20px auto;
+}
+
+#container {
+    margin: 0px auto;
+    width: 688px;
+}

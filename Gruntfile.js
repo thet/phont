@@ -6,7 +6,6 @@ module.exports = function(grunt) {
             combine: {
                 files: {
                     'src/dist/phont.min.css': [
-                        'src/css/keyboard.css',
                         'src/css/phont.css'
                     ]
                 }
