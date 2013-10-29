@@ -22,9 +22,18 @@
     <div class="char"></div>
     <div class="filterwrapper">
       <div class="filter">
-        <input id="playbackrate" class="filter knob" value="50"  data-fgColor="#0000AA"/>
-        <input id="offset"       class="filter knob" value="0"   data-fgColor="#00AA00"/>
-        <input id="length"       class="filter knob" value="100" data-fgColor="#AA0000"/>
+        <div title="playbackrate - changes the pitch of the sample">
+          <label>rate</label>
+          <input id="playbackrate" class="filter knob" value="50"  data-fgColor="#0000AA"/>
+        </div>
+        <div title="offset - changes the start position of the sample">
+          <label>off</label>
+          <input id="offset"       class="filter knob" value="0"   data-fgColor="#00AA00"/>
+        </div>
+        <div title="length - changes the length of the sample">
+          <label>len</label>
+          <input id="length"       class="filter knob" value="100" data-fgColor="#AA0000"/>
+        </div>
       </div>
     </div>
   </div>
@@ -75,8 +84,10 @@
     <li data-id="" data-keycode="76" class="letter">l</li>
     <li data-id="" data-keycode="59" class="letter">t</li>
     <li data-id="" data-keycode="222" class="letter">f</li>
-    <li data-id="" data-keycode="13" class="play control lastitem state_stop"></li><!-- return -->
-    <li data-id="" data-keycode="16" class="gendershift female control left firstitem" title=""></li>
+    <li data-id="" data-keycode="13" class="play control lastitem state_stop"
+        title="spielt oder stoppt ihre komposition / plays or stops your composition"></li><!-- return -->
+    <li data-id="" data-keycode="16" class="gendershift female control left firstitem"
+        title="wechseln zwischen der männlichen und der weiblichen stimme / change between male and female voice"></li>
     <li data-id="" data-keycode="90" class="letter">ɜʳ</li>
     <li data-id="" data-keycode="88" class="letter">ʌ</li>
     <li data-id="" data-keycode="67" class="letter">ʊ</li>
@@ -87,7 +98,8 @@
     <li data-id="" data-keycode="188" class="letter symbol">.</li>
     <li data-id="" data-keycode="190" class="letter symbol">?</li>
     <li data-id="" data-keycode="191" class="letter symbol">!</li>
-    <li data-id="" data-keycode="16" class="gendershift female control right lastitem"></li>
+    <li data-id="" data-keycode="16" class="gendershift female control right lastitem"
+        title="wechseln zwischen der männlichen und der weiblichen stimme / change between male and female voice"></li>
     <li data-id="" data-keycode="32" class="space firstitem"
         title="setzt eine pause - um die pause zu verlängern, mehrmals tippen / sets a pause - to extend the pause type many times"></li>
   </ul>

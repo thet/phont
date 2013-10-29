@@ -6,7 +6,7 @@ body {
 #write {
     margin: 0 0 5px;
     padding: 5px;
-    
+
     width: 671px;
     min-height: 200px;
     height: auto;
@@ -74,7 +74,7 @@ body {
 #keyboard .capslock {
     width: 80px;
 }
-#keyboard .play.lastitem, 
+#keyboard .play.lastitem,
 #keyboard .return {
     width: 77px;
 }
@@ -103,11 +103,11 @@ body {
 /* keyboard customizations */
 
 /* control buttons */
+#keyboard li.space,
 #keyboard li.control.firstitem { text-align:left; }
 #keyboard li.control.lastitem { text-align:right; }
-#keyboard li.control.firstitem>span { padding: 0 0.5em 0 1em; }
-#keyboard li.control.lastitem>span { padding: 0 1em 0 0.5em; }
 
+#keyboard li.space,
 #keyboard li.control     { font-family: 'Verdana', sans-serif; font-size: 12px; color:white; }
 #keyboard li.save        { background-color: #6e9db1; }
 #keyboard li.play        { background-color: #b8a34a; }
@@ -117,14 +117,15 @@ body {
 #keyboard li.symbol      { background-color: #e4d8b8; }
 
 
+#keyboard li.space:before,
 #keyboard li.control:before { padding:0 0.5em; }
 
-#keyboard li.save:before   { content:'save'; } 
+#keyboard li.save:before   { content:'save'; }
 #keyboard li.state_stop:before   { content:'play'; }
 #keyboard li.state_play:before   { content:'stop'; }
 #keyboard li.female:before { content:'female'; }
 #keyboard li.male:before   { content:'male'; }
-#keyboard li.space:before  { content:'space'; }
+#keyboard li.space:before  { content:'silence'; }
 #keyboard li.delete:before { content:'delete'; }
 
 
@@ -166,3 +167,5 @@ progress[value] {
 .phonem:hover .filter { display: block; z-index:1000; }
 .phonem.template { display: none; }
 .phonem .filter>div { margin:0 3px 3px 3px; }
+.phonem .filter label { margin:0; }
+
