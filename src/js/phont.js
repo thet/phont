@@ -326,6 +326,7 @@ function setSequenceToGui(parent, seq) {
         phon = mapNoteToDom(seq[i], template);
         $(parent).append(phon);
     }
+    $('.sortable').sortable();
 }
 
 function mapNoteToDom(note, template) {

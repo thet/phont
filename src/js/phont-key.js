@@ -157,6 +157,7 @@ $(function(){
             playSample(sounds, mapDomToNote(phon, characters), player);
 
             $write.append(phon);
+            $('.sortable').sortable();
 
         });
 
