@@ -33,13 +33,12 @@ body {
     text-align: center;
     font-weight: bold;
     margin: 0 3px 5px 0;
-    background: rgb(238, 238, 238);
+    background-color: rgb(238, 238, 238);
     border: 2px solid rgb(204, 204, 204);
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
-
 #keyboard li.over,
 #keyboard li:hover {
     position: relative;
@@ -48,6 +47,19 @@ body {
     border-color: black;
     cursor: pointer;
     background-color:#e5e5e5;
+}
+
+.userrole-anonymous #keyboard li.save {
+    background-color: #DDD;
+    color: #EEE;
+}
+.userrole-anonymous #keyboard li.save.over,
+.userrole-anonymous #keyboard li.save:hover {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    border: 2px solid rgb(204, 204, 204);
+    cursor: default;
 }
 
 /* make text unselectable */

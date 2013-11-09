@@ -59,6 +59,7 @@ $(function(){
 
             // save
             if ($this.hasClass('save')) {
+                if ($('body.userrole-anonymous').length > 0) { return; }
                 var seq = getSequenceFromGui($("#write"), characters);
                 console.log('start recording');
                 recordStart();
