@@ -3,6 +3,11 @@ body {
     font: 71%/1.5 'Merriweather Sans', sans-serif;
 }
 
+#phont_form {
+    height: 499px;
+    margin-bottom: 4em;
+}
+
 #write {
     margin: 0 0 5px;
     padding: 5px;
