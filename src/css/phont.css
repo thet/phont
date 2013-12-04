@@ -17,6 +17,11 @@
 .phonem.template { display: none; }
 .phonem .filter>div { margin:0 3px 3px 3px; }
 
+#phont_form {
+    height: 499px;
+    margin-bottom: 4em;
+}
+
 #write {
     width: 671px;
     min-height: 200px;
