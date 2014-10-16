@@ -1006,13 +1006,12 @@ AudioletNode.prototype.remove = function() {
  * @param {Number} [numberOfChannels=2] The number of output channels.
  * @param {Number} [bufferSize=8192] A fixed buffer size to use.
  */
-var mySink;
 function AudioletDevice(audiolet, sampleRate, numberOfChannels, bufferSize) {
     AudioletNode.call(this, audiolet, 1, 0);
 
     this.sink = Sink(this.tick.bind(this), numberOfChannels, bufferSize,
                      sampleRate);
-    mySink = this.sink;
+
     // Re-read the actual values from the sink.  Sample rate especially is
     // liable to change depending on what the soundcard allows.
     this.sampleRate = this.sink.sampleRate;
@@ -1050,7 +1049,7 @@ AudioletDevice.prototype.tick = function(buffer, numberOfChannels) {
             for (var j = this.nodes.length - 1; j > 0; j--) {
                 this.nodes[j].tick();
             }
-            // Cut down tick to just sum the input samples 
+            // Cut down tick to just sum the input samples
             this.createInputSamples();
 
             for (var j = 0; j < numberOfChannels; j++) {
@@ -1092,7 +1091,7 @@ AudioletDevice.prototype.pause = function() {
  * Restart the output stream.
  */
 AudioletDevice.prototype.play = function() {
-   this.paused = false; 
+   this.paused = false;
 };
 
 /**
@@ -2686,7 +2685,7 @@ BufferPlayer.prototype.generate = function() {
         var inputChannel = this.buffer.getChannelData(i);
         output.samples[i] = inputChannel[Math.floor(this.position)];
     }
-    
+
     this.position += playbackRate;
 
     if (this.position >= this.buffer.length) {
@@ -3729,7 +3728,7 @@ IFFT.prototype.transform = function() {
         this.reverseReal[i] = this.realBuffer[this.reverseTable[i]];
         this.reverseImaginary[i] = this.imaginaryBuffer[this.reverseTable[i]];
     }
- 
+
     this.realBuffer.set(this.reverseReal);
     this.imaginaryBuffer.set(this.reverseImaginary);
 
@@ -3929,7 +3928,7 @@ Limiter.prototype.generate = function() {
         else {
             follower = release * (follower - absValue) + absValue;
         }
-        
+
         var diff = follower - threshold;
         if (diff > 0) {
             output.samples[i] = value / (1 + diff);
@@ -4746,7 +4745,7 @@ var WebKitBufferPlayer = function(audiolet, onComplete) {
 
     // Until we are loaded, output no channels.
     this.setNumberOfOutputChannels(0, 0);
-    
+
     if (!this.isWebKit) {
         return;
     }
@@ -4790,7 +4789,7 @@ WebKitBufferPlayer.prototype.stop = function() {
     this.endTime = null;
 
     this.setNumberOfOutputChannels(0);
-   
+
     this.disconnectWebKitNodes();
 };
 
@@ -5282,7 +5281,7 @@ Tanh.prototype.generate = function() {
         var value = input.samples[i];
         output.samples[i] = (Math.exp(value) - Math.exp(-value)) /
                             (Math.exp(value) + Math.exp(-value));
-    } 
+    }
 };
 
 /**
@@ -6014,8 +6013,6 @@ SinkClass.prototype = Sink.prototype = {
  * @method Sink
 */
 	start: function (readFn, channelCount, bufferSize, sampleRate) {
-		//console.log("sink created")
-		
 		this.channelCount	= isNaN(channelCount) || channelCount === null ? this.channelCount: channelCount;
 		this.bufferSize		= isNaN(bufferSize) || bufferSize === null ? this.bufferSize : bufferSize;
 		this.sampleRate		= isNaN(sampleRate) || sampleRate === null ? this.sampleRate : sampleRate;
@@ -6024,8 +6021,6 @@ SinkClass.prototype = Sink.prototype = {
 		this.previousHit	= +new Date();
 		Sink.EventEmitter.call(this);
 		Sink.emit('init', [this].concat([].slice.call(arguments)));
-		
-		// console.log(this)
 	},
 /**
  * The method which will handle all the different types of processing applied on a callback.
@@ -6277,7 +6272,7 @@ void function (prefixes, urlPrefixes) {
 		var b, a = prefixes.slice();
 
 		for (b=a.shift(); typeof b !== 'undefined'; b=a.shift()) {
-			b = Function('return typeof ' + b + name + 
+			b = Function('return typeof ' + b + name +
 				'=== "undefined" ? undefined : ' +
 				b + name)();
 
@@ -6624,7 +6619,7 @@ void function (Sink) {
 Sink.sinks('dummy', function () {
 	var	self = this;
 	self.start.apply(self, arguments);
-	
+
 	function bufferFill () {
 		var	soundData = new Float32Array(self.bufferSize * self.channelCount);
 		self.process(soundData, self.channelCount);
@@ -6669,7 +6664,7 @@ sinks('wav', function () {
 		zeroData		= new Float32Array(self.bufferSize * self.channelCount);
 
 	if (!newAudio().canPlayType('audio/wav; codecs=1') || !btoa) throw 0;
-	
+
 	function bufferFill () {
 		if (self._audio.hasNextFrame) return;
 
@@ -6689,7 +6684,7 @@ sinks('wav', function () {
 
 		if (!self._audio.currentFrame.src) self._audio.nextClip();
 	}
-	
+
 	self.kill		= Sink.doInterval(bufferFill, 40);
 	self._bufferFill	= bufferFill;
 	self._audio		= audio;
@@ -6756,7 +6751,7 @@ sinks('webaudio', function (readFn, channelCount, bufferSize, sampleRate) {
 		soundData	= null,
 		zeroBuffer	= null;
 	self.start.apply(self, arguments);
-	node = context.createJavaScriptNode(self.bufferSize, self.channelCount, self.channelCount);
+    node = context.createScriptProcessor(self.bufferSize, self.channelCount, self.channelCount);
 
 	function bufferFill(e) {
 		var	outputBuffer	= e.outputBuffer,
@@ -6767,7 +6762,7 @@ sinks('webaudio', function (readFn, channelCount, bufferSize, sampleRate) {
 			tail;
 
 		self.ready();
-		
+
 		soundData	= soundData && soundData.length === l * channelCount ? soundData : new Float32Array(l * channelCount);
 		zeroBuffer	= zeroBuffer && zeroBuffer.length === soundData.length ? zeroBuffer : new Float32Array(l * channelCount);
 		soundData.set(zeroBuffer);
@@ -6891,7 +6886,7 @@ Sink.sinks('worker', function () {
 			size		= outputBuffer.size,
 			channels	= new Array(channelCount),
 			tail;
-		
+
 		soundData	= soundData && soundData.length === l * channelCount ? soundData : new Float32Array(l * channelCount);
 		zeroBuffer	= zeroBuffer && zeroBuffer.length === soundData.length ? zeroBuffer : new Float32Array(l * channelCount);
 		soundData.set(zeroBuffer);
@@ -7333,8 +7328,6 @@ Sink.prototype.recordData = function (buffer) {
 */
 
 function Recording (bindTo) {
-	console.log("create recording")
-	console.log(bindTo)
 	this.boundTo = bindTo;
 	this.buffers = [];
 	bindTo.activeRecordings.push(this);
@@ -7349,10 +7342,6 @@ Recording.prototype = {
  * @method Recording
 */
 	add: function (buffer) {
-		//console.log("have buffers, ")
-		// console.log(buffer)
-		
-		// do something meaningful with buffer
 		this.buffers.push(buffer);
 	},
 /**
@@ -7371,7 +7360,6 @@ Recording.prototype = {
 	stop: function () {
 		var	recordings = this.boundTo.activeRecordings,
 			i;
-		console.log(recordings);
 		for (i=0; i<recordings.length; i++) {
 			if (recordings[i] === this) {
 				recordings.splice(i--, 1);
@@ -7502,7 +7490,7 @@ proto.writeBuffersAsync = function (buffer) {
 			bufLength	= buf.b.length;
 			offset		= buf.d;
 			buf.d		-= Math.min(offset, l);
-			
+
 			for (n=0; n + offset < l && n < bufLength; n++) {
 				buffer[n + offset] += buf.b[n];
 			}

@@ -8,27 +8,33 @@ jQuery Knob
 Example
 -------
 
-    <input type="text" value="75" class="dial">
+```html
+<input type="text" value="75" class="dial">
 
-    <script>
+<script>
     $(function() {
         $(".dial").knob();
     });
-    </script>
+</script>
+```
 
 Options
 -------
 
 Options are provided as attributes 'data-option':
 
-    <input type="text" class="dial" data-min="-50" data-max="50">
+```html
+<input type="text" class="dial" data-min="-50" data-max="50">
+```
 
 ... or in the "knob()" call :
 
-    $(".dial").knob({
-                    'min':-50
-                    ,'max':50
-                    });
+```javascript
+$(".dial").knob({
+    'min':-50,
+    'max':50
+});
+```
 
 The following options are supported :
 
@@ -40,6 +46,7 @@ Behaviors :
 * angleArc : arc size in degrees | default=360.
 * stopper : stop at min & max on keydown/mousewheel | default=true.
 * readOnly : disable input and events | default=false.
+* rotation : direction of progression | default=clockwise.
 
 UI :
 * cursor : display mode "cursor", cursor size could be changed passing a numeric value to the option, default width is used when passing boolean value "true" | default=gauge.
@@ -57,11 +64,13 @@ UI :
 Hooks
 -------
 
-    <script>
+```html
+<script>
     $(".dial").knob({
-                        'release' : function (v) { /*make something*/ }
-                    });
-    </script>
+        'release' : function (v) { /*make something*/ }
+    });
+</script>
+```
 
 * 'release' : executed on release
 
@@ -84,71 +93,55 @@ Hooks
 
 * 'cancel' : triggered on [esc] keydown
 
-* 'error' : called if the browser doesn't support canvases and the plugin didn't initialize as a result
+* 'format' : allows to format output (add unit %, ms ...)
 
 The scope (this) of each hook function is the current Knob instance (refer to the demo code).
 
 Example
 -------
 
-    <input type="text" value="75" class="dial">
+```html
+<input type="text" value="75" class="dial">
 
-    <script>
+<script>
     $(".dial").knob({
-                     'change' : function (v) { console.log(v); }
-                    });
-    </script>
-
+        'change' : function (v) { console.log(v); }
+    });
+</script>
+```
 
 Dynamically configure
 -------
 
-    <script>
-    $('.dial')
-        .trigger(
-            'configure',
-            {
+```html
+<script>
+    $('.dial').trigger(
+        'configure',
+        {
             "min":10,
             "max":40,
             "fgColor":"#FF0000",
             "skin":"tron",
             "cursor":true
-            }
-        );
-    </script>
+        }
+    );
+</script>
+```
 
 Set the value
 -------
 
-    <script>
+```html
+<script>
     $('.dial')
         .val(27)
         .trigger('change');
-    </script>
+</script>
+```
 
 Supported browser
 -------
 
-Tested on Chrome, Safari, Firefox, IE 9.0.
+Tested on Chrome, Safari, Firefox, IE>=8.0 (IE8.0 with excanvas).
 
-MIT License
--------
-
-Copyright (C) 2013 Anthony Terrien
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+![secretplan](https://raw.github.com/aterrien/jQuery-Knob/master/secretplan.jpg)
